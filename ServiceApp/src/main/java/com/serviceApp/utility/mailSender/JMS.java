@@ -12,13 +12,13 @@ public class JMS {
 	private JavaMailSender mailSender;
 
 	// function for sending mail
-	public void sendMail(String email) {
+	public void sendMail(String email, String password) {
 
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom("kunj.hasi103@gmail.com");
 		message.setTo(email);
 		message.setSubject("serviceapp registeration");
-		message.setText("Your Registration for ServiceApp is Successful");
+		message.setText("Your Registration for ServiceApp is Successful. Your credentials are \n Email :"+ email +" \n Password : " + password);
 		
 		mailSender.send(message);
 		

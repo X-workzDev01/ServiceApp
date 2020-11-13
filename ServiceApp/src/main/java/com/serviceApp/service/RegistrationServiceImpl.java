@@ -1,11 +1,14 @@
 package com.serviceApp.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import com.serviceApp.DTO.RegistrationDTO;
 import com.serviceApp.entity.RegistrationEntity;
 import com.serviceApp.repository.RegistrationRepository;
+import com.serviceApp.utility.passwordGenerater.AutoGeneratePassword;
 import com.serviceApp.utility.mailSender.JMS;
 import com.serviceApp.utility.response.Response;
 
@@ -17,17 +20,26 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Autowired
 	private JMS javaMailSender;
-	
+
+	@Autowired
+	private AutoGeneratePassword autoGeneratePassword;
+	private final String password = autoGeneratePassword.autoGeneratePassword();
+
 	@Autowired
 	private RegistrationRepository registrationRepository;
 
 	@Override
-	public Response clientRegistration(RegistrationEntity registrationEntity) {
-		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationEntity.getCompanyName());
+	public Response clientRegistration(RegistrationDTO registrationDTO) {
+
+		RegistrationEntity registrationEntity = new RegistrationEntity();
+		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationDTO.getCompanyName());
 		if (entity == null) {
+			BeanUtils.copyProperties(registrationDTO, registrationEntity);
+			registrationEntity.setPassword(password);
 			registrationRepository.save(registrationEntity);
-			javaMailSender.sendMail(registrationEntity.getEmail());
-			return new Response(environment.getProperty(""), environment.getProperty("SERVER_CODE_SUCCESS"));
+			javaMailSender.sendMail(registrationEntity.getEmail(), password);
+			return new Response(environment.getProperty("USER_REGISTERD"),
+					environment.getProperty("SERVER_CODE_SUCCESS"));
 		} else {
 			return new Response(environment.getProperty("CLIENT_PRESENT"),
 					environment.getProperty("SERVER_CODE_ERROR"));

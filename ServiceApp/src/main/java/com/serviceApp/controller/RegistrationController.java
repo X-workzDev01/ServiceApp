@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.serviceApp.DTO.RegistrationDTO;
 import com.serviceApp.entity.RegistrationEntity;
 import com.serviceApp.service.RegistrationService;
 import com.serviceApp.utility.response.Response;
@@ -19,8 +20,8 @@ public class RegistrationController {
 	private RegistrationService registrationService;
 
 	@PostMapping("/registration")
-	public ResponseEntity<Response> clientRegistration(RegistrationEntity registrationEntity) {
-		return new ResponseEntity<Response>(registrationService.clientRegistration(registrationEntity), HttpStatus.OK);
+	public ResponseEntity<Response> clientRegistration(RegistrationDTO registrationDTO) {
+		return new ResponseEntity<Response>(registrationService.clientRegistration(registrationDTO), HttpStatus.OK);
 
 	}
 
