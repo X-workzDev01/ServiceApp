@@ -3,25 +3,25 @@ package com.serviceApp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.serviceApp.entity.CompanyLoginEntity;
-import com.serviceApp.service.CompanyLoginService;
+import com.serviceApp.DTO.ClientLoginDTO;
+import com.serviceApp.service.ClientLoginService;
 import com.serviceApp.utility.response.Response;
 
 @RestController
 @RequestMapping("/api")
-public class CompanyLoginController {
+public class ClientLoginController {
 
 	@Autowired
-	private CompanyLoginService companyLoginService;
+	private ClientLoginService clientLoginService;
 
-	@PostMapping("/login")
-	public ResponseEntity<Response> login(CompanyLoginEntity entity) {
-
-		return new ResponseEntity<Response>(companyLoginService.login(entity), HttpStatus.OK);
+	@PostMapping("/clientlogin")
+	public ResponseEntity<Response> login(ClientLoginDTO clientLoginDTO) {
+		System.out.println(clientLoginDTO.getEmailId()+"######################################################");
+		return new ResponseEntity<Response>(clientLoginService.login(clientLoginDTO), HttpStatus.OK);
 	}
+
 }
