@@ -1,0 +1,9 @@
+package com.rentalService.service;
+
+import com.rentalService.entity.Registration;
+
+public interface RegistrationService {
+	
+	public void registeredClient (Registration registrationEntity);
+
+}

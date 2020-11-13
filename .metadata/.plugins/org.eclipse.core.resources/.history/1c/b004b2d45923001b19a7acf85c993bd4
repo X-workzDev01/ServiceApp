@@ -1,0 +1,27 @@
+package com.rentalService.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rentalService.dao.Repository;
+import com.rentalService.dto.RegistrationDTO;
+import com.rentalService.entity.RegistrationEntity;
+
+@Service
+public class RegistrationServiceImpl implements RegistrationService{
+
+	@Autowired
+	private Repository repository;
+	
+	
+	private RegistrationEntity registrationEntity;
+	@Override
+	public void registeredClient(RegistrationDTO registrationDTO) {
+		
+		
+		
+		repository.save(registrationEntity);
+		System.out.println("inside service impl");
+	}
+
+}

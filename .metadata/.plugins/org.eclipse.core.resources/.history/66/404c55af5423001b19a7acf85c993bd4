@@ -1,0 +1,5 @@
+package com.rentalService.dao;
+
+public class Repository {
+
+}

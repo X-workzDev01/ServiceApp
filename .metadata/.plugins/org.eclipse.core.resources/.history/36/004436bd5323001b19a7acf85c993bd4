@@ -1,0 +1,18 @@
+package com.rentalService.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.rentalService.entity.Registration;
+import com.rentalService.service.RegistrationService;
+
+@RestController
+@RequestMapping("/api")
+public class serviceapp {
+
+	private RegistrationService service;
+	
+	public void register(Registration registrationEntity) {
+		service.registeredClient(registrationEntity);
+	}
+}

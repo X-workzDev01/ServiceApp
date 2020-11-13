@@ -1,0 +1,13 @@
+package com.rentalService.service;
+
+import com.rentalService.entity.Registration;
+
+public class RegistrationServiceImpl implements RegistrationService{
+
+	@Override
+	public void registeredClient(Registration registrationEntity) {
+		
+		
+	}
+
+}

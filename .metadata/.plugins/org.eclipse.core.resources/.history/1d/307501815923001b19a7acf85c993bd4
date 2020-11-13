@@ -1,0 +1,9 @@
+package com.rentalService.dao;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.rentalService.entity.Registration;
+
+public interface Repository extends CrudRepository<Registration , Integer>{
+
+}
