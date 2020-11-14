@@ -1,5 +1,7 @@
 package com.serviceApp.service;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -21,8 +23,7 @@ public class ClientLoginServiceImpl implements ClientLoginService{
 	private Environment environment;
 	
 	@Override
-	public Response login(ClientLoginDTO loginDTO) {
-		System.out.println(loginDTO.getEmailId()+"=====================================================");
+	public Response login(@Valid ClientLoginDTO loginDTO) {
 		RegistrationEntity registrationEntity=clientLoginRepository.findByEmail(loginDTO.getEmailId());
 		System.out.println(registrationEntity.getEmail());
 		System.out.println(registrationEntity.getPassword());

@@ -6,7 +6,7 @@ public class Response {
 	private String message; // create message in String for give the user message
 	// private Object data;
 	
-	public Response(String statusCode ,String message) {
+	public Response(String message , String statusCode) {
 		this.statusCode = statusCode;
 		this.message = message;
 	}

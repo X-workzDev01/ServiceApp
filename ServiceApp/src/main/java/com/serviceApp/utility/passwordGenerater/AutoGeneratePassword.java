@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class AutoGeneratePassword {
 	
 	public static String autoGeneratePassword() {
-		String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%*";
 		Random random = new Random();
 
 		int len = 8;

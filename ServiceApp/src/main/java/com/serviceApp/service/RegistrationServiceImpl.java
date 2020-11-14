@@ -1,5 +1,9 @@
 package com.serviceApp.service;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -29,7 +33,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private RegistrationRepository registrationRepository;
 
 	@Override
-	public Response clientRegistration(RegistrationDTO registrationDTO) {
+	public Response clientRegistration(@Valid RegistrationDTO registrationDTO) {
 
 		RegistrationEntity registrationEntity = new RegistrationEntity();
 		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationDTO.getCompanyName());
@@ -44,5 +48,11 @@ public class RegistrationServiceImpl implements RegistrationService {
 			return new Response(environment.getProperty("CLIENT_PRESENT"),
 					environment.getProperty("SERVER_CODE_ERROR"));
 		}
+	}
+
+	@Override
+	public List<RegistrationEntity> getAllClients() {
+		List<RegistrationEntity> registrationEntity= registrationRepository.findAll();
+		return registrationEntity;
 	}
 }

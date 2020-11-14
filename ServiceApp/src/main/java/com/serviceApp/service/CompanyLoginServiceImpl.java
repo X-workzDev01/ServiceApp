@@ -1,5 +1,7 @@
 package com.serviceApp.service;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -20,7 +22,7 @@ public class CompanyLoginServiceImpl implements CompanyLoginService {
 	private Environment environment;
 
 	@Override
-	public Response login(CompanyLoginEntity entity) {
+	public Response login(@Valid CompanyLoginEntity entity) {
 		CompanyLoginEntity companyLoginEntity = loginRepository.findByEmail(entity.getEmail());
 		if (companyLoginEntity != null) {
 			if (entity.getPassword().equals(companyLoginEntity.getPassword()) ) {

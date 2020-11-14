@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Entity
 @Table
 public class RegistrationEntity {
@@ -20,8 +23,10 @@ public class RegistrationEntity {
 	private String address;
 	private String password;
 
+	Logger logger = LoggerFactory.getLogger(GenerationType.class);
+	
 	public RegistrationEntity() {
-		System.out.println("invoking  " + this.getClass().getSimpleName());
+		logger.info("invoking "+this.getClass().getSimpleName());
 	}
 
 	public int getId() {
