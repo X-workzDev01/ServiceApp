@@ -18,15 +18,16 @@ public class RegistrationEntity {
 	private int id;
 	private String customerName;
 	private String companyName;
-	private String email;
+	private String emailId;
 	private long contactNumber;
 	private String address;
 	private String password;
 
-	Logger logger = LoggerFactory.getLogger(GenerationType.class);
+	//Logger logger = LoggerFactory.getLogger(getClass());
 	
 	public RegistrationEntity() {
-		logger.info("invoking "+this.getClass().getSimpleName());
+		//logger.info("invoking "+this.getClass().getSimpleName());
+		System.out.println("invoking "+this.getClass().getSimpleName());
 	}
 
 	public int getId() {
@@ -49,12 +50,12 @@ public class RegistrationEntity {
 		this.companyName = companyName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailId(String email) {
+		this.emailId = email;
 	}
 
 	public long getContactNumber() {
@@ -84,7 +85,7 @@ public class RegistrationEntity {
 	@Override
 	public String toString() {
 		return "RegistrationEntity [id=" + id + ", customerName=" + customerName + ", companyName=" + companyName
-				+ ", email=" + email + ", contactNumber=" + contactNumber + ", address=" + address + ", password="
+				+ ", email=" + emailId + ", contactNumber=" + contactNumber + ", address=" + address + ", password="
 				+ password + "]";
 	}
 

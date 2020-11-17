@@ -7,6 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import com.serviceApp.dto.LoginDTO;
 import com.serviceApp.entity.CompanyLoginEntity;
 import com.serviceApp.repository.LoginRepository;
 import com.serviceApp.utility.response.Response;
@@ -22,10 +23,10 @@ public class CompanyLoginServiceImpl implements CompanyLoginService {
 	private Environment environment;
 
 	@Override
-	public Response login(@Valid CompanyLoginEntity entity) {
-		CompanyLoginEntity companyLoginEntity = loginRepository.findByEmail(entity.getEmail());
+	public Response login(@Valid LoginDTO loginDTO) {
+		CompanyLoginEntity companyLoginEntity = loginRepository.findByEmailId(loginDTO.getEmailId());
 		if (companyLoginEntity != null) {
-			if (entity.getPassword().equals(companyLoginEntity.getPassword()) ) {
+			if (loginDTO.getPassword().equals(companyLoginEntity.getPassword()) ) {
 
 				System.out.println("sucessfully login");
 				return new Response(environment.getProperty("LOGIN_SUCCESS"),

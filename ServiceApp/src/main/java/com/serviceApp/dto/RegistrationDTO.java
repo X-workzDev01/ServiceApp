@@ -1,24 +1,19 @@
-
-package com.serviceApp.DTO;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+package com.serviceApp.dto;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RegistrationDTO {
 
-	@NotNull
+	//@NotNull
 	private String customerName;
-	@NotNull
+	//@NotNull
 	private String companyName;
-	@NotNull @Email
+	//@NotNull @Email
 	private String email;
-	@NotNull @Size(min = 9 , max = 12)
+	//@NotNull @Size(min = 9 , max = 12)
 	private long contactNumber;
-	@NotNull
+	//@NotNull
 	private String address;
 
 	Logger logger = LoggerFactory.getLogger(RegistrationDTO.class);

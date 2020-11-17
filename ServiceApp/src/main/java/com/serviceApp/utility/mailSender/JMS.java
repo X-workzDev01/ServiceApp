@@ -15,7 +15,7 @@ public class JMS {
 	public void sendMail(String email, String password) {
 
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("kunj.hasi103@gmail.com");
+		message.setFrom("xworkzodc01@gmail.com");
 		message.setTo(email);
 		message.setSubject("serviceapp registeration");
 		message.setText("Your Registration for ServiceApp is Successful. Your credentials are \n Email :"+ email +" \n Password : " + password);

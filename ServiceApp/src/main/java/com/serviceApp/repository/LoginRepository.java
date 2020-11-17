@@ -6,6 +6,6 @@ import com.serviceApp.entity.CompanyLoginEntity;
 
 public interface LoginRepository extends JpaRepository<CompanyLoginEntity, Integer> {
 
-	CompanyLoginEntity findByEmail(String email);
+	CompanyLoginEntity findByEmailId(String emailId);
 
 }

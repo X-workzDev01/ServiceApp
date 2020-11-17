@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.serviceApp.DTO.ClientLoginDTO;
-import com.serviceApp.repository.ClientLoginRepository;
+import com.serviceApp.dto.LoginDTO;
 import com.serviceApp.service.ClientLoginService;
 import com.serviceApp.utility.response.Response;
 
@@ -18,15 +17,16 @@ import com.serviceApp.utility.response.Response;
 @RequestMapping("/api")
 public class ClientLoginController {
 	
-	Logger logger = LoggerFactory.getLogger(ClientLoginController.class);
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
 	private ClientLoginService clientLoginService;
 
 	@PostMapping("/clientlogin")
-	public ResponseEntity<Response> login(ClientLoginDTO clientLoginDTO) {
+
+	public ResponseEntity<Response> login(LoginDTO loginDTO) {
 		
-		return new ResponseEntity<Response>(clientLoginService.login(clientLoginDTO), HttpStatus.OK);
+		return new ResponseEntity<Response>(clientLoginService.login(loginDTO), HttpStatus.OK);
 	}
 
 }

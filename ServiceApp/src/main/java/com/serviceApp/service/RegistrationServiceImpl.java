@@ -2,18 +2,16 @@ package com.serviceApp.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-import com.serviceApp.DTO.RegistrationDTO;
+import com.serviceApp.dto.RegistrationDTO;
 import com.serviceApp.entity.RegistrationEntity;
 import com.serviceApp.repository.RegistrationRepository;
-import com.serviceApp.utility.passwordGenerater.AutoGeneratePassword;
 import com.serviceApp.utility.mailSender.JMS;
+import com.serviceApp.utility.passwordGenerater.AutoGeneratePassword;
 import com.serviceApp.utility.response.Response;
 
 @Service
@@ -33,7 +31,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 	private RegistrationRepository registrationRepository;
 
 	@Override
-	public Response clientRegistration(@Valid RegistrationDTO registrationDTO) {
+	public Response clientRegistration(/* @Valid */ RegistrationDTO registrationDTO) {
 
 		RegistrationEntity registrationEntity = new RegistrationEntity();
 		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationDTO.getCompanyName());
@@ -41,7 +39,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			BeanUtils.copyProperties(registrationDTO, registrationEntity);
 			registrationEntity.setPassword(password);
 			registrationRepository.save(registrationEntity);
-			javaMailSender.sendMail(registrationEntity.getEmail(), password);
+			javaMailSender.sendMail(registrationEntity.getEmailId(), password);
 			return new Response(environment.getProperty("USER_REGISTERD"),
 					environment.getProperty("SERVER_CODE_SUCCESS"));
 		} else {

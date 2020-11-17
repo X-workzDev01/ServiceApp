@@ -1,30 +1,25 @@
-package com.serviceApp.DTO;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+package com.serviceApp.dto;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.serviceApp.controller.ClientLoginController;
+public class LoginDTO {
 
-public class ClientLoginDTO {
-
-	@NotNull @Email
+//	@NotNull @Email
 	private String emailId;
-	@NotNull
+	// @NotNull
 	private String password;
 
-	Logger logger = LoggerFactory.getLogger(ClientLoginDTO.class);
-	
-	public ClientLoginDTO() {
-		logger.info("invoking "+this.getClass().getSimpleName());
+	Logger logger = LoggerFactory.getLogger(getClass());
+
+	public LoginDTO() {
+		logger.info("invoking " + this.getClass().getSimpleName());
 	}
 
 	public String getEmailId() {
 		return emailId;
 	}
-	
+
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
@@ -32,7 +27,7 @@ public class ClientLoginDTO {
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}

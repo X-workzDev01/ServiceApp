@@ -3,12 +3,11 @@ package com.serviceApp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.serviceApp.entity.CompanyLoginEntity;
+import com.serviceApp.dto.LoginDTO;
 import com.serviceApp.service.CompanyLoginService;
 import com.serviceApp.utility.response.Response;
 
@@ -20,8 +19,8 @@ public class CompanyLoginController {
 	private CompanyLoginService companyLoginService;
 
 	@PostMapping("/login")
-	public ResponseEntity<Response> login(CompanyLoginEntity entity) {
+	public ResponseEntity<Response> login(LoginDTO logindto) {
 
-		return new ResponseEntity<Response>(companyLoginService.login(entity), HttpStatus.OK);
+		return new ResponseEntity<Response>(companyLoginService.login(logindto), HttpStatus.OK);
 	}
 }
