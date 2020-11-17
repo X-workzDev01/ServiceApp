@@ -10,7 +10,7 @@ public class RegistrationDTO {
 	//@NotNull
 	private String companyName;
 	//@NotNull @Email
-	private String email;
+	private String emailId;
 	//@NotNull @Size(min = 9 , max = 12)
 	private long contactNumber;
 	//@NotNull
@@ -38,12 +38,12 @@ public class RegistrationDTO {
 		this.companyName = companyName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailId(String email) {
+		this.emailId = email;
 	}
 
 	public long getContactNumber() {
@@ -64,7 +64,7 @@ public class RegistrationDTO {
 
 	@Override
 	public String toString() {
-		return "RegistrationDTO [customerName=" + customerName + ", companyName=" + companyName + ", email=" + email
+		return "RegistrationDTO [customerName=" + customerName + ", companyName=" + companyName + ", email=" + emailId
 				+ ", contactNumber=" + contactNumber + ", address=" + address + "]";
 	}
 
