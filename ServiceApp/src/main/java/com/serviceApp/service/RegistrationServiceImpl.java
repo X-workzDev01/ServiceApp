@@ -25,7 +25,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Autowired
 	private AutoGeneratePassword autoGeneratePassword;
-	private final String password = autoGeneratePassword.autoGeneratePassword();
+	private String password = autoGeneratePassword.autoGeneratePassword();
 
 	@Autowired
 	private RegistrationRepository registrationRepository;
@@ -39,7 +39,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			BeanUtils.copyProperties(registrationDTO, registrationEntity);
 			registrationEntity.setPassword(password);
 			registrationRepository.save(registrationEntity);
-			javaMailSender.sendMail(registrationEntity.getEmailId(), password);
+			javaMailSender.sendMail(registrationDTO.getEmailId(), password);
 			return new Response(environment.getProperty("USER_REGISTERD"),
 					environment.getProperty("SERVER_CODE_SUCCESS"));
 		} else {

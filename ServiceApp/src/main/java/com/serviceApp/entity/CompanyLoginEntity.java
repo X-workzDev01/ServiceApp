@@ -13,9 +13,7 @@ public class CompanyLoginEntity {
 	@Id
 	@GeneratedValue( strategy = GenerationType.AUTO)
 	private int id;
-	//@NotNull @Email
 	private String emailId;
-	//@NotNull @Size(min = 8 , max = 8 , message = "password should be only 8 character")
 	private String password;
 
 	//Logger logger = LoggerFactory.getLogger(CompanyLoginEntity.class);

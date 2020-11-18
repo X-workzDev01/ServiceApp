@@ -1,19 +1,23 @@
 package com.serviceApp.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RegistrationDTO {
 
-	//@NotNull
+	@NotNull
 	private String customerName;
-	//@NotNull
+	@NotNull
 	private String companyName;
-	//@NotNull @Email
-	private String email;
-	//@NotNull @Size(min = 9 , max = 12)
+	@NotNull @Email
+	private String emailId;
+	@NotNull @Size(min = 9 , max = 12)
 	private long contactNumber;
-	//@NotNull
+	@NotNull
 	private String address;
 
 	Logger logger = LoggerFactory.getLogger(RegistrationDTO.class);
@@ -38,12 +42,12 @@ public class RegistrationDTO {
 		this.companyName = companyName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailId(String email) {
+		this.emailId = email;
 	}
 
 	public long getContactNumber() {
@@ -64,7 +68,7 @@ public class RegistrationDTO {
 
 	@Override
 	public String toString() {
-		return "RegistrationDTO [customerName=" + customerName + ", companyName=" + companyName + ", email=" + email
+		return "RegistrationDTO [customerName=" + customerName + ", companyName=" + companyName + ", email=" + emailId
 				+ ", contactNumber=" + contactNumber + ", address=" + address + "]";
 	}
 
