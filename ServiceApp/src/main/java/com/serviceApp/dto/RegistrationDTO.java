@@ -13,9 +13,15 @@ public class RegistrationDTO {
 	private String customerName;
 	@NotNull
 	private String companyName;
+<<<<<<< HEAD
 	@NotNull @Email
 	private String emailId;
 	@NotNull @Size(min = 9 , max = 12)
+=======
+	//@NotNull @Email
+	private String emailId;
+	//@NotNull @Size(min = 9 , max = 12)
+>>>>>>> clientLogin
 	private long contactNumber;
 	@NotNull
 	private String address;
