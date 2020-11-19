@@ -1,13 +1,17 @@
 package com.serviceApp.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LoginDTO {
 
-//	@NotNull @Email
+	@NotNull
+	@Email
 	private String emailId;
-	// @NotNull
+	@NotNull
 	private String password;
 
 	Logger logger = LoggerFactory.getLogger(getClass());

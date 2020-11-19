@@ -20,11 +20,11 @@ public class CompanyLoginController {
 
 	@Autowired
 	private CompanyLoginService companyLoginService;
-	
-private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	public CompanyLoginController() {
-		logger.info("invoking ---------"+this.getClass().getSimpleName());
+		logger.info("invoking ---------" + this.getClass().getSimpleName());
 	}
 
 	@PostMapping("/login")

@@ -2,6 +2,10 @@ package com.serviceApp.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -22,24 +26,26 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Autowired
 	private JMS javaMailSender;
-
-	@Autowired
-	private AutoGeneratePassword autoGeneratePassword;
-	private final String password = autoGeneratePassword.autoGeneratePassword();
-
+	
 	@Autowired
 	private RegistrationRepository registrationRepository;
+	
+private Logger logger = LoggerFactory.getLogger(getClass());
+	
+	public RegistrationServiceImpl() {
+		logger.info("invoking "+this.getClass().getSimpleName());
+	}
 
 	@Override
-	public Response clientRegistration(/* @Valid */ RegistrationDTO registrationDTO) {
+	public Response clientRegistration( @Valid  RegistrationDTO registrationDTO) {
 
 		RegistrationEntity registrationEntity = new RegistrationEntity();
 		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationDTO.getCompanyName());
 		if (entity == null) {
 			BeanUtils.copyProperties(registrationDTO, registrationEntity);
-			registrationEntity.setPassword(password);
+			registrationEntity.setPassword(AutoGeneratePassword.autoGeneratePassword());
 			registrationRepository.save(registrationEntity);
-			javaMailSender.sendMail(registrationEntity.getEmailId(), password);
+			javaMailSender.sendMail(registrationDTO.getEmailId(), registrationEntity.getPassword());
 			return new Response(environment.getProperty("USER_REGISTERD"),
 					environment.getProperty("SERVER_CODE_SUCCESS"));
 		} else {
