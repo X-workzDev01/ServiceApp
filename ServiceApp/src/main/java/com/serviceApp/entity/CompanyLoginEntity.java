@@ -16,9 +16,7 @@ public class CompanyLoginEntity {
 	@Id
 	@GeneratedValue( strategy = GenerationType.AUTO)
 	private int id;
-	
 	private String emailId;
-
 	private String password;
 
 	Logger logger = LoggerFactory.getLogger(getClass());

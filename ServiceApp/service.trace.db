@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+2020-11-18 17:50:42 database: flush
+=======
 2020-11-19 11:04:44 database: flush
+>>>>>>> clientLogin
 org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:E:/WorksSpace/ServiceApp/ServiceApp/service.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
@@ -50,6 +54,9 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1178)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
+<<<<<<< HEAD
+2020-11-18 17:58:47 database: flush
+=======
 2020-11-19 11:04:44 database: flush
 org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:E:/WorksSpace/ServiceApp/ServiceApp/service.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
@@ -155,6 +162,7 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
 2020-11-19 11:59:02 database: flush
+>>>>>>> clientLogin
 org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:E:/WorksSpace/ServiceApp/ServiceApp/service.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)

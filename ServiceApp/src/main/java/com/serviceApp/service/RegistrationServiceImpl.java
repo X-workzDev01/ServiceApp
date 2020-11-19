@@ -26,7 +26,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Autowired
 	private JMS javaMailSender;
-
 	@Autowired
 	private RegistrationRepository registrationRepository;
 
