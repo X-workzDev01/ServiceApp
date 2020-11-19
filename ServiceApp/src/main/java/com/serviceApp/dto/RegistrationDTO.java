@@ -2,7 +2,6 @@ package com.serviceApp.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,21 +12,9 @@ public class RegistrationDTO {
 	private String customerName;
 	@NotNull
 	private String companyName;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	@NotNull @Email
 	private String emailId;
-	@NotNull @Size(min = 9 , max = 12)
-=======
-	//@NotNull @Email
-	private String emailId;
-	//@NotNull @Size(min = 9 , max = 12)
->>>>>>> clientLogin
-=======
-	@NotNull @Email
-	private String emailId;
-	@NotNull @Size(min = 9 , max = 12)
->>>>>>> clientLogin
+	@NotNull 
 	private long contactNumber;
 	@NotNull
 	private String address;

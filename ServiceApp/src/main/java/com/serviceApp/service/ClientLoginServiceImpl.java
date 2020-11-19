@@ -1,7 +1,5 @@
 package com.serviceApp.service;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ public class ClientLoginServiceImpl implements ClientLoginService{
 	}
 	
 	@Override
-	public Response login(@Valid LoginDTO loginDTO) {
+	public Response login( LoginDTO loginDTO) {
 		RegistrationEntity registrationEntity=clientLoginRepository.findByEmailId(loginDTO.getEmailId());
 		
 		if (registrationEntity != null) {

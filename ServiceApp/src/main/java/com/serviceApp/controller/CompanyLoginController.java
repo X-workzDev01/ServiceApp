@@ -1,5 +1,7 @@
 package com.serviceApp.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ public class CompanyLoginController {
 
 	@PostMapping("/login")
 	@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Response> login(LoginDTO logindto) {
+	public ResponseEntity<Response> login(@Valid LoginDTO logindto) {
 
 		return new ResponseEntity<Response>(companyLoginService.login(logindto), HttpStatus.OK);
 	}
