@@ -14,6 +14,7 @@ public class RegistrationDTO {
 	@NotNull
 	private String companyName;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@NotNull @Email
 	private String emailId;
 	@NotNull @Size(min = 9 , max = 12)
@@ -22,11 +23,16 @@ public class RegistrationDTO {
 	private String emailId;
 	//@NotNull @Size(min = 9 , max = 12)
 >>>>>>> clientLogin
+=======
+	@NotNull @Email
+	private String emailId;
+	@NotNull @Size(min = 9 , max = 12)
+>>>>>>> clientLogin
 	private long contactNumber;
 	@NotNull
 	private String address;
 
-	Logger logger = LoggerFactory.getLogger(RegistrationDTO.class);
+	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	public RegistrationDTO() {
 		logger.info("invoking "+this.getClass().getSimpleName());

@@ -1,5 +1,9 @@
 package com.serviceApp.service;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -20,8 +24,14 @@ public class ClientLoginServiceImpl implements ClientLoginService{
 	@Autowired
 	private Environment environment;
 	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
+	public ClientLoginServiceImpl() {
+		logger.info("invoking "+this.getClass().getSimpleName());
+	}
+	
 	@Override
-	public Response login( LoginDTO loginDTO) {
+	public Response login(@Valid LoginDTO loginDTO) {
 		RegistrationEntity registrationEntity=clientLoginRepository.findByEmailId(loginDTO.getEmailId());
 		
 		if (registrationEntity != null) {

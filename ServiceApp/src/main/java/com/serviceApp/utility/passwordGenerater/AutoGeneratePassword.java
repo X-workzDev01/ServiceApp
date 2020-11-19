@@ -1,11 +1,11 @@
 package com.serviceApp.utility.passwordGenerater;
 
-import java.util.Random;
-
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AutoGeneratePassword {
+<<<<<<< HEAD
 
 	public String autoGeneratePassword() {
 		String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@#$%*";
@@ -20,4 +20,10 @@ public class AutoGeneratePassword {
 	}
 
 		
+=======
+	
+	 public static String autoGeneratePassword() {
+		 return RandomStringUtils.randomAlphanumeric(8);
+	 }
+>>>>>>> clientLogin
 }
