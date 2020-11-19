@@ -23,6 +23,7 @@ public class CompanyLoginEntity {
 	
 	public CompanyLoginEntity() {
 		logger.info("invoking "+this.getClass().getSimpleName());
+		System.out.println("invoking "+this.getClass().getSimpleName());
 	}
 
 	public String getEmailId() {
