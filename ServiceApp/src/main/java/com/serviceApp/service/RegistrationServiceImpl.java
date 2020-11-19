@@ -26,18 +26,18 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Autowired
 	private JMS javaMailSender;
-	
+
 	@Autowired
 	private RegistrationRepository registrationRepository;
-	
-private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	public RegistrationServiceImpl() {
-		logger.info("invoking "+this.getClass().getSimpleName());
+		logger.info("invoking " + this.getClass().getSimpleName());
 	}
 
 	@Override
-	public Response clientRegistration( @Valid  RegistrationDTO registrationDTO) {
+	public Response clientRegistration(RegistrationDTO registrationDTO) {
 
 		RegistrationEntity registrationEntity = new RegistrationEntity();
 		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationDTO.getCompanyName());
@@ -56,7 +56,7 @@ private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
 	public List<RegistrationEntity> getAllClients() {
-		List<RegistrationEntity> registrationEntity= registrationRepository.findAll();
+		List<RegistrationEntity> registrationEntity = registrationRepository.findAll();
 		return registrationEntity;
 	}
 }

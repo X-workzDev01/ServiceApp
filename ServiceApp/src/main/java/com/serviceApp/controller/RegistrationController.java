@@ -2,6 +2,8 @@ package com.serviceApp.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ public class RegistrationController {
 	}
 
 	@PostMapping("/registration")
-	public ResponseEntity<Response> clientRegistration(RegistrationDTO registrationDTO) {
+	public ResponseEntity<Response> clientRegistration(@Valid RegistrationDTO registrationDTO) {
 		return new ResponseEntity<Response>(registrationService.clientRegistration(registrationDTO), HttpStatus.OK);
 	}
 

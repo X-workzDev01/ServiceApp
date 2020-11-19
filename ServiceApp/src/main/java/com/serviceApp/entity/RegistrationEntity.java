@@ -23,11 +23,10 @@ public class RegistrationEntity {
 	private String address;
 	private String password;
 
-	//Logger logger = LoggerFactory.getLogger(getClass());
+	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	public RegistrationEntity() {
-		//logger.info("invoking "+this.getClass().getSimpleName());
-		System.out.println("invoking "+this.getClass().getSimpleName());
+		logger.info("invoking "+this.getClass().getSimpleName());
 	}
 
 	public int getId() {

@@ -1,7 +1,5 @@
 package com.serviceApp.service;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +29,7 @@ private Logger logger = LoggerFactory.getLogger(getClass());
 	}
 
 	@Override
-	public Response login(@Valid LoginDTO loginDTO) {
+	public Response login(LoginDTO loginDTO) {
 		CompanyLoginEntity companyLoginEntity = loginRepository.findByEmailId(loginDTO.getEmailId());
 		if (companyLoginEntity != null) {
 			if (loginDTO.getPassword().equals(companyLoginEntity.getPassword()) ) {
