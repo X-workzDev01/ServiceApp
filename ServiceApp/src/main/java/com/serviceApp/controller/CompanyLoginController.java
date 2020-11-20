@@ -30,7 +30,7 @@ public class CompanyLoginController {
 	}
 
 	@PostMapping("/login")
-	@CrossOrigin(origins = "http://localhost:4200")
+	//@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<Response> login(@Valid LoginDTO logindto) {
 
 		return new ResponseEntity<Response>(companyLoginService.login(logindto), HttpStatus.OK);

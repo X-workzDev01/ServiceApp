@@ -2,8 +2,6 @@ package com.serviceApp.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -15,7 +13,7 @@ import com.serviceApp.dto.RegistrationDTO;
 import com.serviceApp.entity.RegistrationEntity;
 import com.serviceApp.repository.RegistrationRepository;
 import com.serviceApp.utility.mailSender.JMS;
-import com.serviceApp.utility.passwordGenerater.AutoGeneratePassword;
+import com.serviceApp.utility.passwordGenerater.AutoGenerateString;
 import com.serviceApp.utility.response.Response;
 
 @Service
@@ -43,7 +41,7 @@ private Logger logger = LoggerFactory.getLogger(getClass());
 		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationDTO.getCompanyName());
 		if (entity == null) {
 			BeanUtils.copyProperties(registrationDTO, registrationEntity);
-			registrationEntity.setPassword(AutoGeneratePassword.autoGeneratePassword());
+			registrationEntity.setPassword(AutoGenerateString.autoGenerateString());
 			registrationRepository.save(registrationEntity);
 			javaMailSender.sendMail(registrationDTO.getEmailId(), registrationEntity.getPassword());
 
