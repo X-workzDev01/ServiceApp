@@ -9,18 +9,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.serviceApp.dto.ClientComplainDTO;
 import com.serviceApp.dto.LoginDTO;
-import com.serviceApp.entity.CompanyGadgetLIstEntity;
+import com.serviceApp.entity.CompanyGadgetListEntity;
 import com.serviceApp.service.ClientLoginService;
 import com.serviceApp.utility.response.Response;
 
 @RestController
 @RequestMapping("/api")
+//@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8080" })
 public class ClientLoginController {
 
 	@Autowired
@@ -33,13 +36,12 @@ public class ClientLoginController {
 	}
 
 	@PostMapping("/clientlogin")
-	// @CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Response> login(@Valid LoginDTO loginDTO) {
+	public ResponseEntity<Response> login(@Valid /* @RequestBody */ LoginDTO loginDTO) {
 		return new ResponseEntity<Response>(clientLoginService.login(loginDTO), HttpStatus.OK);
 	}
 
 	@PostMapping("/viewGadgets")
-	public List<CompanyGadgetLIstEntity> listOfGadgets(String emailId) {
+	public List<CompanyGadgetListEntity> listOfGadgets(String emailId) {
 		return clientLoginService.getListOfGadgets(emailId);
 	}
 

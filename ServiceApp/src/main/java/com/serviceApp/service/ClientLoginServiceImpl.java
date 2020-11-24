@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.serviceApp.dto.ClientComplainDTO;
 import com.serviceApp.dto.LoginDTO;
 import com.serviceApp.entity.ClientComplainEntity;
-import com.serviceApp.entity.CompanyGadgetLIstEntity;
+import com.serviceApp.entity.CompanyGadgetListEntity;
 import com.serviceApp.entity.RegistrationEntity;
 import com.serviceApp.repository.CompanyGadgetRepository;
 import com.serviceApp.repository.ComplainRepository;
@@ -50,7 +50,7 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 		if (registrationEntity != null) {
 			if (loginDTO.getPassword().equals(registrationEntity.getPassword())) {
 				return new Response(environment.getProperty("LOGIN_SUCCESS"),
-						environment.getProperty("SERVER_CODE_SUCCESS"));
+						environment.getProperty("SERVER_CODE_SUCCESS"),registrationEntity);
 			}
 			return new Response(environment.getProperty("INVALID_PASSWORD"),
 					environment.getProperty("SERVER_CODE_ERROR"));
@@ -61,9 +61,9 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 	}
 
 	@Override
-	public List<CompanyGadgetLIstEntity> getListOfGadgets(String emailId) {
+	public List<CompanyGadgetListEntity> getListOfGadgets(String companyName) {
 
-		return companyGadgetRepository.findAllByEmailId(emailId);
+		return companyGadgetRepository.findAllByCompanyName(companyName);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 		ClientComplainEntity created = complainRepository.save(clientComplainEntity);
 		if (created != null) {
 			return new Response(environment.getProperty("TICKET_CREATED"),
-					environment.getProperty("SERVER_CODE_SUCCESS"));
+					environment.getProperty("SERVER_CODE_SUCCESS"),created);
 		}else {
 			return new Response(environment.getProperty("FAIL_TO_CREATE_TICKET"),
 					environment.getProperty("SERVER_CODE_ERROR"));

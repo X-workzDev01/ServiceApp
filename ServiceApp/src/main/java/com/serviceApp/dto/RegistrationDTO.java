@@ -6,6 +6,13 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class RegistrationDTO {
 
 	@NotNull
@@ -24,51 +31,4 @@ public class RegistrationDTO {
 	public RegistrationDTO() {
 		logger.info("invoking "+this.getClass().getSimpleName());
 	}
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String email) {
-		this.emailId = email;
-	}
-
-	public long getContactNumber() {
-		return contactNumber;
-	}
-
-	public void setContactNumber(long contactNumber) {
-		this.contactNumber = contactNumber;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	@Override
-	public String toString() {
-		return "RegistrationDTO [customerName=" + customerName + ", companyName=" + companyName + ", email=" + emailId
-				+ ", contactNumber=" + contactNumber + ", address=" + address + "]";
-	}
-
 }

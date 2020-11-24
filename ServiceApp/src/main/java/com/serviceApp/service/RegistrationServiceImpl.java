@@ -42,11 +42,10 @@ private Logger logger = LoggerFactory.getLogger(getClass());
 		if (entity == null) {
 			BeanUtils.copyProperties(registrationDTO, registrationEntity);
 			registrationEntity.setPassword(AutoGenerateString.autoGenerateString());
-			registrationRepository.save(registrationEntity);
+			RegistrationEntity registered=registrationRepository.save(registrationEntity);
 			javaMailSender.sendMail(registrationDTO.getEmailId(), registrationEntity.getPassword());
-
 			return new Response(environment.getProperty("USER_REGISTERD"),
-					environment.getProperty("SERVER_CODE_SUCCESS"));
+					environment.getProperty("SERVER_CODE_SUCCESS"),registered);
 		} else {
 			return new Response(environment.getProperty("CLIENT_PRESENT"),
 					environment.getProperty("SERVER_CODE_ERROR"));

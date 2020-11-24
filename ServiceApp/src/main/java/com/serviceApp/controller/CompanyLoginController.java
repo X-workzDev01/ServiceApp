@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ import com.serviceApp.service.CompanyLoginService;
 import com.serviceApp.utility.response.Response;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8080" })
 @RequestMapping("/api")
 public class CompanyLoginController {
 
@@ -35,8 +36,7 @@ public class CompanyLoginController {
 	}
 
 	@PostMapping("/login")
-	//@CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Response> login(@Valid LoginDTO logindto) {
+	public ResponseEntity<Response> login(@Valid /* @RequestBody */ LoginDTO logindto) {
 
 		return new ResponseEntity<Response>(companyLoginService.login(logindto), HttpStatus.OK);
 	}

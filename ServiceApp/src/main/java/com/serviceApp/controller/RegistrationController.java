@@ -21,7 +21,7 @@ import com.serviceApp.service.RegistrationService;
 import com.serviceApp.utility.response.Response;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8080" })
 @RequestMapping("/api")
 public class RegistrationController {
 

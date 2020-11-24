@@ -1,7 +1,18 @@
 package com.serviceApp.dto;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotNull;
 
+import com.serviceApp.entity.RegistrationEntity;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class ClientComplainDTO {
 
 	@NotNull
@@ -17,51 +28,5 @@ public class ClientComplainDTO {
 
 	public ClientComplainDTO() {
 		System.out.println("invooking " + this.getClass().getSimpleName());
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public String getSerialNo() {
-		return serialNo;
-	}
-
-	public void setSerialNo(String serialNo) {
-		this.serialNo = serialNo;
-	}
-
-	public String getMcType() {
-		return mcType;
-	}
-
-	public void setMcType(String mcType) {
-		this.mcType = mcType;
-	}
-
-	public String getProblem() {
-		return problem;
-	}
-
-	public void setProblem(String problem) {
-		this.problem = problem;
-	}
-
-	@Override
-	public String toString() {
-		return "ClientComplainDTO [companyName=" + companyName + ", model=" + model + ", serialNo=" + serialNo
-				+ ", mcType=" + mcType + ", problem=" + problem + "]";
 	}
 }

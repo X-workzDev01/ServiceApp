@@ -25,25 +25,23 @@ public class CompanyLoginServiceImpl implements CompanyLoginService {
 
 	@Autowired
 	private ComplainRepository complainRepository;
-	
+
 	@Autowired
 	private Environment environment;
-	
-private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	public CompanyLoginServiceImpl() {
-		logger.info("invoking "+this.getClass().getSimpleName());
+		logger.info("invoking " + this.getClass().getSimpleName());
 	}
 
 	@Override
 	public Response login(LoginDTO loginDTO) {
 		CompanyLoginEntity companyLoginEntity = loginRepository.findByEmailId(loginDTO.getEmailId());
 		if (companyLoginEntity != null) {
-			if (loginDTO.getPassword().equals(companyLoginEntity.getPassword()) ) {
-
-				System.out.println("sucessfully login");
+			if (loginDTO.getPassword().equals(companyLoginEntity.getPassword())) {
 				return new Response(environment.getProperty("LOGIN_SUCCESS"),
-						environment.getProperty("SERVER_CODE_SUCCESS"));
+						environment.getProperty("SERVER_CODE_SUCCESS"), companyLoginEntity);
 			}
 			return new Response(environment.getProperty("INVALID_PASSWORD"),
 					environment.getProperty("SERVER_CODE_ERROR"));
@@ -52,10 +50,10 @@ private Logger logger = LoggerFactory.getLogger(getClass());
 					environment.getProperty("SERVER_CODE_ERROR"));
 		}
 	}
-	
+
 	@Override
 	public List<ClientComplainEntity> veiwAllTicketas() {
-		List<ClientComplainEntity> clientComplainEntity= complainRepository.findAll();
+		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAll();
 		return clientComplainEntity;
 	}
 }
