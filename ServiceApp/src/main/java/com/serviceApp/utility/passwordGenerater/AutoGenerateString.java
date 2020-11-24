@@ -9,5 +9,8 @@ public class AutoGenerateString {
 	 public static String autoGenerateString() {
 		 return RandomStringUtils.randomAlphanumeric(8);
 	 }
-
+	 
+	 public static String autoGenerateTicket() {
+		 return RandomStringUtils.randomNumeric(8);
+	 }
 }

@@ -56,4 +56,10 @@ public class CompanyLoginServiceImpl implements CompanyLoginService {
 		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAll();
 		return clientComplainEntity;
 	}
+
+	@Override
+	public List<ClientComplainEntity> veiwTicketasByCompanyName() {
+		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAllByCompanyName();
+		return clientComplainEntity;
+	}
 }

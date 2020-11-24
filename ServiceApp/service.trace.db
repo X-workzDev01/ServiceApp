@@ -4,3 +4,6 @@ drop tabale CLIENT_COMPLAIN_ENTITY [42001-200]
 2020-11-24 17:47:30 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "REGISTRATION_ENTITY" not found; SQL statement:
 drop table REGISTRATION_ENTITY [42102-200]
+2020-11-24 19:15:07 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE REGISTRATION REGISTRATION_CLIENT_COMPLAIN[*]"; SQL statement:
+drop table REGISTRATION REGISTRATION_CLIENT_COMPLAIN [42000-200]

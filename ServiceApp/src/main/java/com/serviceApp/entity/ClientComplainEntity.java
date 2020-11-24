@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -27,10 +25,8 @@ public class ClientComplainEntity {
 	private String problem;
 	private String status;
 	private Date date;
-	@ManyToOne
-	@JoinColumn(name = "FK_CompanyName")
-	private RegistrationEntity registrationEntity;
-
+	private String companyName;
+	
 	public ClientComplainEntity() {
 		System.out.println("invoking " + this.getClass().getSimpleName());
 	}

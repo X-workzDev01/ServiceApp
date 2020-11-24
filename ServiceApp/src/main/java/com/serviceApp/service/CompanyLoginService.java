@@ -11,4 +11,6 @@ public interface CompanyLoginService {
 	public Response login(LoginDTO loginDTO);
 	
 	public List<ClientComplainEntity> veiwAllTicketas();
+
+	public List<ClientComplainEntity> veiwTicketasByCompanyName();
 }

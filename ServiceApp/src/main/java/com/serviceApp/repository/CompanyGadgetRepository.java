@@ -8,6 +8,8 @@ import com.serviceApp.entity.CompanyGadgetListEntity;
 
 public interface CompanyGadgetRepository extends JpaRepository<CompanyGadgetListEntity, Integer>{
 
-	List<CompanyGadgetListEntity> findAllByCompanyName(String companyName);
+	//List<CompanyGadgetListEntity> findAllByCompanyName(String companyName);
+
+	List<CompanyGadgetListEntity> findAllByEmailId(String emailID);
 
 }

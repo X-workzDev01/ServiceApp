@@ -20,7 +20,7 @@ public class CompanyGadgetListEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String companyName;
+	private String emailId;
 	private String model;
 	private String serialNo;
 	private String mcType;

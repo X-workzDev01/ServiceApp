@@ -61,16 +61,16 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 	}
 
 	@Override
-	public List<CompanyGadgetListEntity> getListOfGadgets(String companyName) {
+	public List<CompanyGadgetListEntity> getListOfGadgets(String emailID) {
 
-		return companyGadgetRepository.findAllByCompanyName(companyName);
+		return companyGadgetRepository.findAllByEmailId(emailID);
 	}
 
 	@Override
 	public Response createTicket(ClientComplainDTO clientComplainDTO) {
 		ClientComplainEntity clientComplainEntity = new ClientComplainEntity();
 		BeanUtils.copyProperties(clientComplainDTO, clientComplainEntity);
-		clientComplainEntity.setTicket(AutoGenerateString.autoGenerateString());
+		clientComplainEntity.setTicket(AutoGenerateString.autoGenerateTicket());
 		ClientComplainEntity created = complainRepository.save(clientComplainEntity);
 		if (created != null) {
 			return new Response(environment.getProperty("TICKET_CREATED"),
