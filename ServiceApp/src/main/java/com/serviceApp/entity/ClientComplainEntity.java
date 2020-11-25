@@ -1,80 +1,45 @@
 package com.serviceApp.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
-@Table
+@Getter
+@Setter
+@Table(name = "ClientComplain")
 public class ClientComplainEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private String complaintId;
 	private String model;
 	private String serialNo;
 	private String mcType;
 	private String problem;
-	private String ticket;
-	private String companyName;
-
+	private String status;
+	private Date date;
+	
+	@ManyToOne
+	@JoinColumn(name = "companyName")
+	@JsonBackReference
+	RegistrationEntity registration;
+	
 	public ClientComplainEntity() {
 		System.out.println("invoking " + this.getClass().getSimpleName());
 	}
 
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public String getSerialNo() {
-		return serialNo;
-	}
-
-	public void setSerialNo(String serialNo) {
-		this.serialNo = serialNo;
-	}
-
-	public String getMcType() {
-		return mcType;
-	}
-
-	public void setMcType(String mcType) {
-		this.mcType = mcType;
-	}
-
-	public String getProblem() {
-		return problem;
-	}
-
-	public void setProblem(String problem) {
-		this.problem = problem;
-	}
-
-	public String getTicket() {
-		return ticket;
-	}
-
-	public void setTicket(String ticket) {
-		this.ticket = ticket;
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
 	@Override
 	public String toString() {
-		return "ClientComplainEntity [id=" + id + ", model=" + model + ", serialNo=" + serialNo + ", mcType=" + mcType
-				+ ", problem=" + problem + ", ticket=" + ticket + ", companyName=" + companyName + "]";
+		return "ClientComplainEntity [ticket=" + complaintId + ", model=" + model + ", serialNo=" + serialNo + ", mcType="
+				+ mcType + ", problem=" + problem + ", status=" + status + ", date=" + date + "]";
 	}
 }

@@ -1,6 +1,12 @@
 package com.serviceApp.service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Formatter;
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +19,7 @@ import org.springframework.stereotype.Service;
 import com.serviceApp.dto.ClientComplainDTO;
 import com.serviceApp.dto.LoginDTO;
 import com.serviceApp.entity.ClientComplainEntity;
-import com.serviceApp.entity.CompanyGadgetLIstEntity;
+import com.serviceApp.entity.CompanyGadgetListEntity;
 import com.serviceApp.entity.RegistrationEntity;
 import com.serviceApp.repository.CompanyGadgetRepository;
 import com.serviceApp.repository.ComplainRepository;
@@ -45,39 +51,59 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 
 	@Override
 	public Response login(LoginDTO loginDTO) {
+		logger.info("invoking ClientLoginServiceImpl.login();");
 		RegistrationEntity registrationEntity = registrationRepository.findByEmailId(loginDTO.getEmailId());
-
+		logger.info("Getting data from registration table");
 		if (registrationEntity != null) {
+			logger.info("registrationEntity not null " + registrationEntity);
 			if (loginDTO.getPassword().equals(registrationEntity.getPassword())) {
+				logger.info("emaailId and password match.");
+				logger.info("return login success");
 				return new Response(environment.getProperty("LOGIN_SUCCESS"),
-						environment.getProperty("SERVER_CODE_SUCCESS"));
+						environment.getProperty("SERVER_CODE_SUCCESS"), registrationEntity);
 			}
+			logger.info("password does't match.  Returning password does't match");
 			return new Response(environment.getProperty("INVALID_PASSWORD"),
 					environment.getProperty("SERVER_CODE_ERROR"));
 		} else {
+			logger.info("email not found ");
 			return new Response(environment.getProperty("INVALID_CREDENTIALS"),
 					environment.getProperty("SERVER_CODE_ERROR"));
 		}
 	}
 
 	@Override
-	public List<CompanyGadgetLIstEntity> getListOfGadgets(String emailId) {
+	public List<CompanyGadgetListEntity> getListOfGadgets(String emailID) {
 
-		return companyGadgetRepository.findAllByEmailId(emailId);
+		return companyGadgetRepository.findAllByEmailId(emailID);
 	}
 
 	@Override
 	public Response createTicket(ClientComplainDTO clientComplainDTO) {
-		ClientComplainEntity clientComplainEntity = new ClientComplainEntity();
-		BeanUtils.copyProperties(clientComplainDTO, clientComplainEntity);
-		clientComplainEntity.setTicket(AutoGenerateString.autoGenerateString());
-		ClientComplainEntity created = complainRepository.save(clientComplainEntity);
+		// change methos by emailid and company name
+		logger.info("invoked createTicket() {0}", clientComplainDTO);
+		RegistrationEntity entity = registrationRepository.findByCompanyName(clientComplainDTO.getCompanyName());
+		logger.info("" + entity);
+		ClientComplainEntity created = null;
+		logger.info("getting registration entity");
+		if (entity != null) {
+			logger.info("Entity is not null");
+			ClientComplainEntity clientComplainEntity = new ClientComplainEntity();
+			BeanUtils.copyProperties(clientComplainDTO, clientComplainEntity);
+			logger.info("Copyed properties from dto to entity");
+			clientComplainEntity.setComplaintId(AutoGenerateString.autoGenerateTicket());
+			logger.info("Ticket generated");
+			clientComplainEntity.setRegistration(entity);
+			created = complainRepository.save(clientComplainEntity);
+			logger.info("saved clientComplainEntity()");
+		}
 		if (created != null) {
 			return new Response(environment.getProperty("TICKET_CREATED"),
-					environment.getProperty("SERVER_CODE_SUCCESS"));
-		}else {
+					environment.getProperty("SERVER_CODE_SUCCESS"), created);
+		} else {
 			return new Response(environment.getProperty("FAIL_TO_CREATE_TICKET"),
 					environment.getProperty("SERVER_CODE_ERROR"));
 		}
+
 	}
 }

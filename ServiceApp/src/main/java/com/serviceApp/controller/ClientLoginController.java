@@ -9,22 +9,31 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.serviceApp.dto.ClientComplainDTO;
 import com.serviceApp.dto.LoginDTO;
-import com.serviceApp.entity.CompanyGadgetLIstEntity;
+import com.serviceApp.entity.ClientComplainEntity;
+import com.serviceApp.entity.CompanyGadgetListEntity;
 import com.serviceApp.service.ClientLoginService;
+import com.serviceApp.service.CompanyLoginService;
 import com.serviceApp.utility.response.Response;
 
 @RestController
 @RequestMapping("/api")
+//@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8080" })
 public class ClientLoginController {
 
 	@Autowired
 	private ClientLoginService clientLoginService;
+	
+	@Autowired
+	private CompanyLoginService companyLoginService;
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -33,18 +42,50 @@ public class ClientLoginController {
 	}
 
 	@PostMapping("/clientlogin")
-	// @CrossOrigin(origins = "http://localhost:4200")
-	public ResponseEntity<Response> login(@Valid LoginDTO loginDTO) {
-		return new ResponseEntity<Response>(clientLoginService.login(loginDTO), HttpStatus.OK);
+	public ResponseEntity<Response> clientLogin(@Valid /* @RequestBody */ LoginDTO loginDTO) {
+		logger.info("invoking clientLogin()");
+		Response response= null;
+		if(loginDTO != null) {
+			logger.info("loginDTO not null");
+			response= clientLoginService.login(loginDTO);
+			logger.info("return response "+ response);
+		}
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 
-	@PostMapping("/viewGadgets")
-	public List<CompanyGadgetLIstEntity> listOfGadgets(String emailId) {
-		return clientLoginService.getListOfGadgets(emailId);
+	@GetMapping("/viewGadgets/{emailId}")
+	public List<CompanyGadgetListEntity> listOfGadgetsByEmailId(@PathVariable ("emailId") String emailId) {
+		logger.info("invoking listOfGadgets()");
+		List<CompanyGadgetListEntity> response= null;
+		if(emailId != null) {
+			logger.info("String emailId = "+ emailId );
+			response=clientLoginService.getListOfGadgets(emailId);
+			logger.info("return response "+ response);
+		}
+		return response;
 	}
 
 	@PostMapping("/createTicket")
-	public ResponseEntity<Response> createTicket(@Valid ClientComplainDTO clientComplainDTO) {
-		return new ResponseEntity<Response>(clientLoginService.createTicket(clientComplainDTO), HttpStatus.OK);
+	public ResponseEntity<Response> createTicket(@Valid @RequestBody ClientComplainDTO clientComplainDTO) {
+		logger.info("invoking createTicket()");
+		Response response = null;
+		if (clientComplainDTO != null) {
+			logger.info("clientComplainDTO not null"+clientComplainDTO);
+			response=clientLoginService.createTicket(clientComplainDTO);
+			logger.info("returned response "+response);
+		}
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
+	}
+	
+	@GetMapping("/viewTicketsByCompanyName/{companyName}")
+	public List<ClientComplainEntity> viewTicketsByCompanyName(@PathVariable("companyName") String companyName) {
+		logger.info("invoking viewTicketsByCompanyName()");
+		List<ClientComplainEntity> response = null;
+		if (companyName != null) {
+			logger.info("company name is not null " + companyName);
+			response = companyLoginService.veiwTicketsByCompanyName(companyName);
+			logger.info("returning response " + response);
+		}
+		return response;
 	}
 }

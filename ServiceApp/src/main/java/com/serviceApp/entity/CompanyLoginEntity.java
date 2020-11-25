@@ -6,8 +6,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table (name = "companylogin")
+@Getter
+@Setter
 public class CompanyLoginEntity {
 
 	@Id
@@ -15,31 +20,16 @@ public class CompanyLoginEntity {
 	private int id;
 	private String emailId;
 	private String password;
-
+	private String FullName;
+	private String role;	
 	
 	public CompanyLoginEntity() {
 		System.out.println("invoking "+this.getClass().getSimpleName());
 	}
 
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String email) {
-		this.emailId = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@Override
 	public String toString() {
-		return "CompanyLogin [email=" + emailId + ", password=" + password + "]";
+		return "CompanyLoginEntity [id=" + id + ", emailId=" + emailId + ", password=" + password + ", FullName="
+				+ FullName + ", role=" + role + "]";
 	}
-	
 }

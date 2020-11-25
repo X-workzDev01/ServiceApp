@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.serviceApp.dto.LoginDTO;
 import com.serviceApp.entity.ClientComplainEntity;
+import com.serviceApp.entity.CompanyGadgetListEntity;
 import com.serviceApp.entity.CompanyLoginEntity;
+import com.serviceApp.repository.CompanyGadgetRepository;
 import com.serviceApp.repository.ComplainRepository;
 import com.serviceApp.repository.LoginRepository;
 import com.serviceApp.utility.response.Response;
@@ -27,23 +29,24 @@ public class CompanyLoginServiceImpl implements CompanyLoginService {
 	private ComplainRepository complainRepository;
 	
 	@Autowired
+	private CompanyGadgetRepository companyGadgetRepository;
+
+	@Autowired
 	private Environment environment;
-	
-private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	public CompanyLoginServiceImpl() {
-		logger.info("invoking "+this.getClass().getSimpleName());
+		logger.info("invoking " + this.getClass().getSimpleName());
 	}
 
 	@Override
 	public Response login(LoginDTO loginDTO) {
 		CompanyLoginEntity companyLoginEntity = loginRepository.findByEmailId(loginDTO.getEmailId());
 		if (companyLoginEntity != null) {
-			if (loginDTO.getPassword().equals(companyLoginEntity.getPassword()) ) {
-
-				System.out.println("sucessfully login");
+			if (loginDTO.getPassword().equals(companyLoginEntity.getPassword())) {
 				return new Response(environment.getProperty("LOGIN_SUCCESS"),
-						environment.getProperty("SERVER_CODE_SUCCESS"));
+						environment.getProperty("SERVER_CODE_SUCCESS"), companyLoginEntity);
 			}
 			return new Response(environment.getProperty("INVALID_PASSWORD"),
 					environment.getProperty("SERVER_CODE_ERROR"));
@@ -52,10 +55,22 @@ private Logger logger = LoggerFactory.getLogger(getClass());
 					environment.getProperty("SERVER_CODE_ERROR"));
 		}
 	}
-	
+
 	@Override
 	public List<ClientComplainEntity> veiwAllTicketas() {
-		List<ClientComplainEntity> clientComplainEntity= complainRepository.findAll();
+		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAll();
 		return clientComplainEntity;
+	}
+
+	@Override
+	public List<ClientComplainEntity> veiwTicketsByCompanyName(String companyName) {
+		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAllByCompanyName(companyName);
+		return clientComplainEntity;
+	}
+
+	@Override
+	public List<CompanyGadgetListEntity> veiwAllGadgets() {
+		List<CompanyGadgetListEntity> gadgetListEntities = companyGadgetRepository.findAll();
+		return gadgetListEntities;
 	}
 }

@@ -27,26 +27,25 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Autowired
 	private RegistrationRepository registrationRepository;
-	
-private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	public RegistrationServiceImpl() {
-		logger.info("invoking "+this.getClass().getSimpleName());
+		logger.info("invoking " + this.getClass().getSimpleName());
 	}
 
 	@Override
-	public Response clientRegistration(  RegistrationDTO registrationDTO) {
+	public Response clientRegistration(RegistrationDTO registrationDTO) {
 
 		RegistrationEntity registrationEntity = new RegistrationEntity();
 		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationDTO.getCompanyName());
 		if (entity == null) {
 			BeanUtils.copyProperties(registrationDTO, registrationEntity);
 			registrationEntity.setPassword(AutoGenerateString.autoGenerateString());
-			registrationRepository.save(registrationEntity);
+			RegistrationEntity registered = registrationRepository.save(registrationEntity);
 			javaMailSender.sendMail(registrationDTO.getEmailId(), registrationEntity.getPassword());
-
 			return new Response(environment.getProperty("USER_REGISTERD"),
-					environment.getProperty("SERVER_CODE_SUCCESS"));
+					environment.getProperty("SERVER_CODE_SUCCESS"), registered);
 		} else {
 			return new Response(environment.getProperty("CLIENT_PRESENT"),
 					environment.getProperty("SERVER_CODE_ERROR"));
@@ -55,7 +54,29 @@ private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
 	public List<RegistrationEntity> getAllClients() {
-		List<RegistrationEntity> registrationEntity= registrationRepository.findAll();
+		List<RegistrationEntity> registrationEntity = registrationRepository.findAll();
 		return registrationEntity;
+	}
+
+	@Override
+	public Response deleteClient(String companyName) {
+		logger.info("invoking deleteClient()");
+		RegistrationEntity registrationEntity = null;
+		int id=0;
+		registrationEntity = registrationRepository.findByCompanyName(companyName);
+		logger.info("finding for company");
+		if (registrationEntity != null) {
+			logger.info("company found");
+			id = registrationRepository.deleteAllByCompanyName(companyName);
+		}
+		if (id == 1) {
+			logger.info("company deleted " + registrationEntity);
+			return new Response(environment.getProperty("DELETED_CLIENT"),
+					environment.getProperty("SERVER_CODE_SUCCESS"), registrationEntity);
+		} else {
+			logger.info("company not found");
+			return new Response(environment.getProperty("CLIENT_NOT_FOUND"),
+					environment.getProperty("SERVER_CODE_ERROR"));
+		}
 	}
 }
