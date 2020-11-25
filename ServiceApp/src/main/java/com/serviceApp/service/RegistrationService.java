@@ -10,4 +10,6 @@ public interface RegistrationService {
 	public Response clientRegistration(RegistrationDTO registrationDTO);
 
 	public List<RegistrationEntity> getAllClients();
+
+	public Response deleteClient(String companyName);
 }
