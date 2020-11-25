@@ -1,9 +1,9 @@
 package com.serviceApp.entity;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,6 +26,7 @@ public class RegistrationEntity {
 	private long contactNumber;
 	private String address;
 	private String password;
+	private Date date;
 	
 	@OneToMany(mappedBy = "registration")
 	@JsonManagedReference

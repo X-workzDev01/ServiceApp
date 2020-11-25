@@ -27,7 +27,10 @@ public class ClientComplainEntity {
 	private String problem;
 	private String status;
 	private Date date;
-	
+	private String engineerEmail;
+	private String clientComment;
+	private String adminComment;
+	private String engineerComment;
 	@ManyToOne
 	@JoinColumn(name = "companyName")
 	@JsonBackReference
@@ -39,7 +42,9 @@ public class ClientComplainEntity {
 
 	@Override
 	public String toString() {
-		return "ClientComplainEntity [ticket=" + complaintId + ", model=" + model + ", serialNo=" + serialNo + ", mcType="
-				+ mcType + ", problem=" + problem + ", status=" + status + ", date=" + date + "]";
+		return "ClientComplainEntity [complaintId=" + complaintId + ", model=" + model + ", serialNo=" + serialNo
+				+ ", mcType=" + mcType + ", problem=" + problem + ", status=" + status + ", date=" + date
+				+ ", engineerEmail=" + engineerEmail + ", clientComment=" + clientComment + ", adminComment="
+				+ adminComment + ", engineerComment=" + engineerComment + "]";
 	}
 }

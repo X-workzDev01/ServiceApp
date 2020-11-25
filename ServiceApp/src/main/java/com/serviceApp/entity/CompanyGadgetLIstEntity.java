@@ -25,7 +25,7 @@ public class CompanyGadgetListEntity {
 	private String serialNo;
 	private String mcType;
 	private String dateOfAssigne;
-	private String status;
+	private String status;//assigned/returned
 
 	public CompanyGadgetListEntity() {
 		System.out.println();

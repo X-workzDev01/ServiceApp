@@ -49,13 +49,13 @@ public class ClientLoginController {
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 
-	@GetMapping("/viewGadgets/{emailId}")
-	public List<CompanyGadgetListEntity> listOfGadgetsByEmailId(@PathVariable ("emailId") String emailId) {
+	@GetMapping("/viewGadgets/{companyName}")
+	public List<CompanyGadgetListEntity> listOfGadgetsByEmailId(@PathVariable ("companyName") String companyName) {
 		logger.info("invoking listOfGadgets()");
 		List<CompanyGadgetListEntity> response= null;
-		if(emailId != null) {
-			logger.info("String emailId = "+ emailId );
-			response=clientLoginService.getListOfGadgets(emailId);
+		if(companyName != null) {
+			logger.info("String emailId = "+ companyName );
+			response=clientLoginService.getListOfGadgets(companyName);
 			logger.info("return response "+ response);
 		}
 		return response;

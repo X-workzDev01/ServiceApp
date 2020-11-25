@@ -12,7 +12,4 @@ public interface RegistrationRepository extends JpaRepository<RegistrationEntity
 
 	RegistrationEntity deleteByCompanyName(String companyName);
 
-	int deleteAllByCompanyName(String companyName);
-	
-
 }

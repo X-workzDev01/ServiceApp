@@ -57,16 +57,4 @@ public class RegistrationController {
 
 		return response;
 	}
-	
-	@DeleteMapping("/deleteClient/{companyName}")
-	public ResponseEntity<Response> deleteClient( @PathVariable ("companyName") String companyName){
-		logger.info("invoking deleteClient()");
-		Response response = null;
-		if (companyName != null) {
-			logger.info("Company Name "+companyName);
-			response = registrationService.deleteClient(companyName);
-			logger.info("Returning response");
-		}
-		return new ResponseEntity<Response>(response,HttpStatus.OK);
-	}
 }

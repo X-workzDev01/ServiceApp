@@ -59,29 +59,4 @@ public class RegistrationServiceImpl implements RegistrationService {
 		List<RegistrationEntity> registrationEntity = registrationRepository.findAll();
 		return registrationEntity;
 	}
-
-	@Override
-	public Response deleteClient(String companyName) {
-		logger.info("invoking deleteClient()");
-		RegistrationEntity registrationEntity = null;
-		int id = 0;
-		registrationEntity = registrationRepository.findByCompanyName(companyName);
-		logger.info("finding for company");
-		if (registrationEntity != null) {
-			logger.info("company found");
-			id = registrationRepository.deleteAllByCompanyName(companyName);
-
-			if (id == 1) {
-				logger.info("company deleted " + registrationEntity);
-				return new Response(environment.getProperty("DELETED_CLIENT"),
-						environment.getProperty("SERVER_CODE_SUCCESS"), registrationEntity);
-			}
-			return new Response(environment.getProperty("CLIENT_FOUND"), environment.getProperty("SERVER_CODE_ERROR"),
-					registrationEntity);
-		} else {
-			logger.info("company not found");
-			return new Response(environment.getProperty("CLIENT_NOT_FOUND"),
-					environment.getProperty("SERVER_CODE_ERROR"));
-		}
-	}
 }

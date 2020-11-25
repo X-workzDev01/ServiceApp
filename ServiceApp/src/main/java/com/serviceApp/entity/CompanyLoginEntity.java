@@ -21,7 +21,8 @@ public class CompanyLoginEntity {
 	private String emailId;
 	private String password;
 	private String FullName;
-	private String role;	
+	private String role;
+	private String auditStatus;//insert/delete
 	
 	public CompanyLoginEntity() {
 		System.out.println("invoking "+this.getClass().getSimpleName());
