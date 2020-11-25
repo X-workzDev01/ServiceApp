@@ -16,7 +16,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "ClientComplain")
+@Table(name = "ClientComplaint")
 public class ClientComplainEntity {
 
 	@Id
@@ -25,7 +25,7 @@ public class ClientComplainEntity {
 	private String serialNo;
 	private String mcType;
 	private String problem;
-	private String status;
+	private String complaintStatus;
 	private Date date;
 	private String engineerEmail;
 	private String clientComment;
@@ -43,8 +43,9 @@ public class ClientComplainEntity {
 	@Override
 	public String toString() {
 		return "ClientComplainEntity [complaintId=" + complaintId + ", model=" + model + ", serialNo=" + serialNo
-				+ ", mcType=" + mcType + ", problem=" + problem + ", status=" + status + ", date=" + date
-				+ ", engineerEmail=" + engineerEmail + ", clientComment=" + clientComment + ", adminComment="
+				+ ", mcType=" + mcType + ", problem=" + problem + ", complaintStatus=" + complaintStatus + ", date="
+				+ date + ", engineerEmail=" + engineerEmail + ", clientComment=" + clientComment + ", adminComment="
 				+ adminComment + ", engineerComment=" + engineerComment + "]";
 	}
+
 }

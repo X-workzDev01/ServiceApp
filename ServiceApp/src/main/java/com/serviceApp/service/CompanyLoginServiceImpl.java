@@ -76,4 +76,12 @@ public class CompanyLoginServiceImpl implements CompanyLoginService {
 		logger.info("returning response");
 		return gadgetListEntities;
 	}
+
+	@Override
+	public List<CompanyLoginEntity> viewAllEngineer() {
+		logger.info("invoking viewAllEngineer()");
+		List<CompanyLoginEntity> response = loginRepository.findAllByRole("ENGINEER");
+		logger.info("returning response");
+		return response;
+	}
 }

@@ -102,7 +102,7 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 			logger.info("Setted foreginkey ");
 			clientComplainEntity.setDate(new Date());
 			logger.info("Setted current date ");
-			clientComplainEntity.setStatus("pending");
+			clientComplainEntity.setComplaintStatus("pending");
 			logger.info("Setted status  ");
 			created = complainRepository.save(clientComplainEntity);
 			logger.info("saved clientComplainEntity()");

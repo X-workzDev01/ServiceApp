@@ -1,0 +1,6 @@
+2020-11-26 00:03:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CLIENT_COMPLAIN" not found; SQL statement:
+select company.* from CLIENT_COMPLAIN  as company inner join REGISTRATION as reg where reg.COMPANY_NAME= ? [42102-200]
+2020-11-26 00:03:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CLIENT_COMPLAIN" not found; SQL statement:
+select company.* from CLIENT_COMPLAIN  as company inner join REGISTRATION as reg where reg.COMPANY_NAME= ? [42102-200]

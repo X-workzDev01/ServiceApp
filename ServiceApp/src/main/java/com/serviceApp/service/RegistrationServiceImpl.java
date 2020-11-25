@@ -1,5 +1,6 @@
 package com.serviceApp.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -44,6 +45,8 @@ public class RegistrationServiceImpl implements RegistrationService {
 			logger.info("");
 			BeanUtils.copyProperties(registrationDTO, registrationEntity);
 			registrationEntity.setPassword(AutoGenerateString.autoGenerateString());
+			registrationEntity.setDate(new Date());
+			registrationEntity.setAuditStatus("insert");
 			RegistrationEntity registered = registrationRepository.save(registrationEntity);
 			javaMailSender.sendMail(registrationDTO.getEmailId(), registrationEntity.getPassword());
 			return new Response(environment.getProperty("USER_REGISTERD"),

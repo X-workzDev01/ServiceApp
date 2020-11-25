@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -27,8 +28,9 @@ public class RegistrationEntity {
 	private String address;
 	private String password;
 	private Date date;
+	private String auditStatus;//insert/delete
 	
-	@OneToMany(mappedBy = "registration")
+	@OneToMany(mappedBy = "registration" , fetch = FetchType.EAGER)
 	@JsonManagedReference
 	Set<ClientComplainEntity> clientComplainEntities ;
 	

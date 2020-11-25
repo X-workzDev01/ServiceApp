@@ -23,6 +23,8 @@ public class ClientComplainDTO {
 	private String mcType;
 	@NotNull
 	private String problem;
+	@NotNull
+	private String clientComment;
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 	

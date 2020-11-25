@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.serviceApp.dto.LoginDTO;
 import com.serviceApp.entity.ClientComplainEntity;
 import com.serviceApp.entity.CompanyGadgetListEntity;
+import com.serviceApp.entity.CompanyLoginEntity;
 import com.serviceApp.service.CompanyLoginService;
 import com.serviceApp.utility.response.Response;
 
@@ -34,6 +35,14 @@ public class CompanyLoginController {
 		logger.info("invoking ---------" + this.getClass().getSimpleName());
 	}
 
+	@GetMapping("/viewAllEngineer")
+	public List<CompanyLoginEntity> viewAllEngineer(){
+		logger.info("invoking viewAllEngineer()");
+		List<CompanyLoginEntity> response = companyLoginService.viewAllEngineer();
+		logger.info("returning response "+ response);
+		return response;
+	}
+	
 	@PostMapping("/login")
 	public ResponseEntity<Response> companyLogin(@Valid /* @RequestBody */ LoginDTO logindto) {
 		logger.info("invoking companyLogin()");
@@ -61,4 +70,5 @@ public class CompanyLoginController {
 		logger.info("Returning response");
 		return response;
 	}
+	
 }

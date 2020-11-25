@@ -10,7 +10,7 @@ import com.serviceApp.entity.ClientComplainEntity;
 public interface ComplainRepository extends JpaRepository<ClientComplainEntity, String> {
 	// change this to sql query
 
-	@Query(value = "select company.* from CLIENT_COMPLAIN  as company inner join REGISTRATION as reg where reg.COMPANY_NAME= :companyName", nativeQuery = true)
+	@Query(value = "select company.* from CLIENT_COMPLAINT as company inner join REGISTRATION as reg where reg.COMPANY_NAME= :companyName", nativeQuery = true)
 	List<ClientComplainEntity> findAllByCompanyName(String companyName);
 
 }
