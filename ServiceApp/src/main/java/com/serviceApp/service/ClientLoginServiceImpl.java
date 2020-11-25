@@ -1,12 +1,7 @@
 package com.serviceApp.service;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.Formatter;
 import java.util.List;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,9 +68,19 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 	}
 
 	@Override
-	public List<CompanyGadgetListEntity> getListOfGadgets(String emailID) {
-
-		return companyGadgetRepository.findAllByEmailId(emailID);
+	public List<CompanyGadgetListEntity> getListOfGadgets(String CompanyName) {
+		logger.info("invoking getListOfGadgets()");
+		List<CompanyGadgetListEntity> companyGadgetListEntities=companyGadgetRepository.findAllByCompanyName(CompanyName);
+		logger.info("Returning list of gadgets");
+		return companyGadgetListEntities;
+	}
+	
+	@Override
+	public List<ClientComplainEntity> veiwTicketsByCompanyName(String companyName) {
+		logger.info("");
+		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAllByCompanyName(companyName);
+		logger.info("");
+		return clientComplainEntity;
 	}
 
 	@Override
@@ -94,6 +99,11 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 			clientComplainEntity.setComplaintId(AutoGenerateString.autoGenerateTicket());
 			logger.info("Ticket generated");
 			clientComplainEntity.setRegistration(entity);
+			logger.info("Setted foreginkey ");
+			clientComplainEntity.setDate(new Date());
+			logger.info("Setted current date ");
+			clientComplainEntity.setStatus("pending");
+			logger.info("Setted status  ");
 			created = complainRepository.save(clientComplainEntity);
 			logger.info("saved clientComplainEntity()");
 		}

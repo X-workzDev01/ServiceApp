@@ -27,7 +27,7 @@ public class RegistrationEntity {
 	private String address;
 	private String password;
 	
-	@OneToMany(mappedBy = "registration" , fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "registration")
 	@JsonManagedReference
 	Set<ClientComplainEntity> clientComplainEntities ;
 	

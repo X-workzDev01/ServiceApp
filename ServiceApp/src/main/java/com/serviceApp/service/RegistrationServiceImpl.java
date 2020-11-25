@@ -36,10 +36,12 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Override
 	public Response clientRegistration(RegistrationDTO registrationDTO) {
-
+		logger.info("invoking clientRegistration()");
 		RegistrationEntity registrationEntity = new RegistrationEntity();
 		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationDTO.getCompanyName());
+		logger.info("checkiing for client already there or not");
 		if (entity == null) {
+			logger.info("");
 			BeanUtils.copyProperties(registrationDTO, registrationEntity);
 			registrationEntity.setPassword(AutoGenerateString.autoGenerateString());
 			RegistrationEntity registered = registrationRepository.save(registrationEntity);
@@ -62,17 +64,20 @@ public class RegistrationServiceImpl implements RegistrationService {
 	public Response deleteClient(String companyName) {
 		logger.info("invoking deleteClient()");
 		RegistrationEntity registrationEntity = null;
-		int id=0;
+		int id = 0;
 		registrationEntity = registrationRepository.findByCompanyName(companyName);
 		logger.info("finding for company");
 		if (registrationEntity != null) {
 			logger.info("company found");
 			id = registrationRepository.deleteAllByCompanyName(companyName);
-		}
-		if (id == 1) {
-			logger.info("company deleted " + registrationEntity);
-			return new Response(environment.getProperty("DELETED_CLIENT"),
-					environment.getProperty("SERVER_CODE_SUCCESS"), registrationEntity);
+
+			if (id == 1) {
+				logger.info("company deleted " + registrationEntity);
+				return new Response(environment.getProperty("DELETED_CLIENT"),
+						environment.getProperty("SERVER_CODE_SUCCESS"), registrationEntity);
+			}
+			return new Response(environment.getProperty("CLIENT_FOUND"), environment.getProperty("SERVER_CODE_ERROR"),
+					registrationEntity);
 		} else {
 			logger.info("company not found");
 			return new Response(environment.getProperty("CLIENT_NOT_FOUND"),

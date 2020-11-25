@@ -10,6 +10,6 @@ public interface CompanyGadgetRepository extends JpaRepository<CompanyGadgetList
 
 	//List<CompanyGadgetListEntity> findAllByCompanyName(String companyName);
 
-	List<CompanyGadgetListEntity> findAllByEmailId(String emailID);
+	List<CompanyGadgetListEntity> findAllByCompanyName(String companyName);
 
 }

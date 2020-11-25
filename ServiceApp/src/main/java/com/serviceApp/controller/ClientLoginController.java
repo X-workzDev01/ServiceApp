@@ -21,7 +21,6 @@ import com.serviceApp.dto.LoginDTO;
 import com.serviceApp.entity.ClientComplainEntity;
 import com.serviceApp.entity.CompanyGadgetListEntity;
 import com.serviceApp.service.ClientLoginService;
-import com.serviceApp.service.CompanyLoginService;
 import com.serviceApp.utility.response.Response;
 
 @RestController
@@ -31,9 +30,6 @@ public class ClientLoginController {
 
 	@Autowired
 	private ClientLoginService clientLoginService;
-	
-	@Autowired
-	private CompanyLoginService companyLoginService;
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -83,7 +79,7 @@ public class ClientLoginController {
 		List<ClientComplainEntity> response = null;
 		if (companyName != null) {
 			logger.info("company name is not null " + companyName);
-			response = companyLoginService.veiwTicketsByCompanyName(companyName);
+			response = clientLoginService.veiwTicketsByCompanyName(companyName);
 			logger.info("returning response " + response);
 		}
 		return response;

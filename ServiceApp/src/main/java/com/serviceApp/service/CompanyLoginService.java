@@ -13,7 +13,5 @@ public interface CompanyLoginService {
 	
 	public List<ClientComplainEntity> veiwAllTicketas();
 
-	public List<ClientComplainEntity> veiwTicketsByCompanyName(String companyName);
-
 	public List<CompanyGadgetListEntity> veiwAllGadgets();
 }

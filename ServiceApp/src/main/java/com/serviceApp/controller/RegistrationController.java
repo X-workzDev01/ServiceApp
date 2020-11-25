@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,7 +59,7 @@ public class RegistrationController {
 	}
 	
 	@DeleteMapping("/deleteClient/{companyName}")
-	public ResponseEntity<Response> deleteClient(@RequestBody @PathVariable ("companyName") String companyName){
+	public ResponseEntity<Response> deleteClient( @PathVariable ("companyName") String companyName){
 		logger.info("invoking deleteClient()");
 		Response response = null;
 		if (companyName != null) {
