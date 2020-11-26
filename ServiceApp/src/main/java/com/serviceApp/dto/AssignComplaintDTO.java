@@ -5,9 +5,11 @@ import org.slf4j.LoggerFactory;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class AssignComplaintDTO {
 	
 	private String complaintId;
@@ -18,12 +20,6 @@ public class AssignComplaintDTO {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	public AssignComplaintDTO() {
 		logger.info("invoking "+this.getClass().getSimpleName());
-	}
-	@Override
-	public String toString() {
-		return "AssignComplaintDTO [complaintId=" + complaintId + ", complaintStatus=" + complaintStatus
-				+ ", engineerEmail=" + engineerEmail + ", adminComment=" + adminComment + ", engineerComment="
-				+ engineerComment + "]";
 	}
 	
 }

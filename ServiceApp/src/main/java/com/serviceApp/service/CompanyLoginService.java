@@ -20,4 +20,6 @@ public interface CompanyLoginService {
 	public List<CompanyLoginEntity> viewAllEngineer();
 
 	public Response assignComplaint(AssignComplaintDTO assignComplaintDTO);
+
+	public List<ClientComplainEntity> veiwAllTicketas(String emailId);
 }

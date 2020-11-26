@@ -8,10 +8,11 @@ import org.slf4j.LoggerFactory;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-
+@ToString
 public class RegistrationDTO {
 
 	@NotNull
@@ -29,11 +30,5 @@ public class RegistrationDTO {
 	
 	public RegistrationDTO() {
 		logger.info("invoking "+this.getClass().getSimpleName());
-	}
-
-	@Override
-	public String toString() {
-		return "RegistrationDTO [customerName=" + customerName + ", companyName=" + companyName + ", emailId=" + emailId
-				+ ", contactNumber=" + contactNumber + ", address=" + address + "]";
 	}
 }

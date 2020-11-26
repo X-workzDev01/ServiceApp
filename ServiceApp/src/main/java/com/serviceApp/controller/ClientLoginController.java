@@ -26,7 +26,7 @@ import com.serviceApp.utility.response.Response;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201" })
+//@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201" })
 public class ClientLoginController {
 
 	@Autowired
@@ -39,7 +39,7 @@ public class ClientLoginController {
 	}
 
 	@PostMapping("/clientlogin")
-	public ResponseEntity<Response> clientLogin(@Valid @RequestBody LoginDTO loginDTO) {
+	public ResponseEntity<Response> clientLogin(@Valid /* @RequestBody */ LoginDTO loginDTO) {
 		logger.info("invoking clientLoginController.clientLogin()");
 		Response response= null;
 		if(loginDTO != null) {

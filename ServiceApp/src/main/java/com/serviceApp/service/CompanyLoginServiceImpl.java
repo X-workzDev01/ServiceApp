@@ -76,6 +76,14 @@ public class CompanyLoginServiceImpl implements CompanyLoginService {
 	}
 
 	@Override
+	public List<ClientComplainEntity> veiwAllTicketas(String emailId) {
+		logger.info("invoking companyLoginServiceImpl.veiwAllTicketas()");
+		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAllByEngineerEmail(emailId);
+		logger.info("returning response");
+		return clientComplainEntity;
+	}
+
+	@Override
 	public List<CompanyGadgetListEntity> veiwAllGadgets() {
 		logger.info("invoking companyLoginServiceImpl.veiwAllGadgets()");
 		List<CompanyGadgetListEntity> gadgetListEntities = companyGadgetRepository.findAll();
@@ -111,6 +119,10 @@ public class CompanyLoginServiceImpl implements CompanyLoginService {
 				logger.info("updating admincomment");
 				complainEntity.setAdminComment(assignComplaintDTO.getAdminComment());
 			}
+			if (assignComplaintDTO.getEngineerComment() != null) {
+				logger.info("updating engineerCimment "+ assignComplaintDTO.getEngineerComment());
+				complainEntity.setEngineerComment(assignComplaintDTO.getEngineerComment());
+			}
 			complainRepository.save(complainEntity);
 			logger.info("sending mail to "+complainEntity.getEngineerEmail());
 			msg="complaintId : "+ complainEntity.getComplaintId()+"\n mcType : "+complainEntity.getMcType()+"\n model : "+complainEntity.getModel()+"\n Problem : "+complainEntity.getProblem()+"\n serialNo : "+complainEntity.getSerialNo();
@@ -124,4 +136,5 @@ public class CompanyLoginServiceImpl implements CompanyLoginService {
 					environment.getProperty("SERVER_CODE_ERROR"));
 		}
 	}
+
 }

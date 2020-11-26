@@ -8,7 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "ClientComplaint")
+@JsonSerialize
 public class ClientComplainEntity {
 
 	@Id
@@ -33,19 +35,12 @@ public class ClientComplainEntity {
 	private String engineerComment;
 	@ManyToOne
 	@JoinColumn(name = "companyName")
-	@JsonBackReference
+	@JsonIgnoreProperties("clientComplainEntities")
 	RegistrationEntity registration;
-	
+
 	public ClientComplainEntity() {
 		System.out.println("invoking " + this.getClass().getSimpleName());
 	}
 
-	@Override
-	public String toString() {
-		return "ClientComplainEntity [complaintId=" + complaintId + ", model=" + model + ", serialNo=" + serialNo
-				+ ", mcType=" + mcType + ", problem=" + problem + ", complaintStatus=" + complaintStatus + ", date="
-				+ date + ", engineerEmail=" + engineerEmail + ", clientComment=" + clientComment + ", adminComment="
-				+ adminComment + ", engineerComment=" + engineerComment + "]";
-	}
 
 }

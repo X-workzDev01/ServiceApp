@@ -14,14 +14,9 @@ public interface ComplainRepository extends JpaRepository<ClientComplainEntity, 
 			+ "reg on reg.COMPANY_NAME=company.COMPANY_NAME \r\n"
 			+ "where reg.COMPANY_NAME= :companyName AND reg.EMAIL_ID= :emailId", nativeQuery = true)
 	List<ClientComplainEntity> findAllByCompanyName(String companyName , String emailId);
-	
-	/*
-	 * @Query(value =
-	 * "select company.* from CLIENT_COMPLAINT as company inner join REGISTRATION as reg where reg.COMPANY_NAME= :companyName"
-	 * , nativeQuery = true) List<ClientComplainEntity> findAllByCompanyName(String
-	 * companyName);
-	 */
 
 	ClientComplainEntity findByComplaintId(String complaintId);
+
+	List<ClientComplainEntity> findAllByEngineerEmail(String emailId);
 
 }
