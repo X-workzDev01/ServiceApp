@@ -16,5 +16,5 @@ public interface ClientLoginService {
 	
 	public Response createTicket(ClientComplainDTO clientComplainDTO);
 
-	List<ClientComplainEntity> veiwTicketsByCompanyName(String companyName);
+	List<ClientComplainEntity> veiwTicketsByCompanyName(String companyName , String emailId );
 }

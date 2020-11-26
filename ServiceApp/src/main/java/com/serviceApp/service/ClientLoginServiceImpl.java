@@ -76,9 +76,9 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 	}
 	
 	@Override
-	public List<ClientComplainEntity> veiwTicketsByCompanyName(String companyName) {
+	public List<ClientComplainEntity> veiwTicketsByCompanyName(String companyName, String emailId) {
 		logger.info("");
-		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAllByCompanyName(companyName);
+		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAllByCompanyName(companyName  , emailId);
 		logger.info("");
 		return clientComplainEntity;
 	}

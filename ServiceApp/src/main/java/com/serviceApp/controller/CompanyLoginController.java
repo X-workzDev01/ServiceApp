@@ -25,7 +25,7 @@ import com.serviceApp.service.CompanyLoginService;
 import com.serviceApp.utility.response.Response;
 
 @RestController
-//@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201" })
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201" })
 @RequestMapping("/api")
 public class CompanyLoginController {
 
@@ -47,7 +47,7 @@ public class CompanyLoginController {
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<Response> companyLogin(@Valid /* @RequestBody */ LoginDTO logindto) {
+	public ResponseEntity<Response> companyLogin(@Valid  @RequestBody LoginDTO logindto) {
 		logger.info("invoking companyLoginController.companyLogin()");
 		Response response = null;
 		if (logindto != null) {
@@ -85,4 +85,5 @@ public class CompanyLoginController {
 		}
 		return new ResponseEntity<Response> (response , HttpStatus.OK);
 	}
+
 }
