@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
@@ -41,6 +42,4 @@ public class ClientComplainEntity {
 	public ClientComplainEntity() {
 		System.out.println("invoking " + this.getClass().getSimpleName());
 	}
-
-
 }

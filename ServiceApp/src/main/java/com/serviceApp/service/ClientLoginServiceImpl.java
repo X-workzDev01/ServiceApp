@@ -15,10 +15,13 @@ import com.serviceApp.dto.ClientComplainDTO;
 import com.serviceApp.dto.LoginDTO;
 import com.serviceApp.entity.ClientComplainEntity;
 import com.serviceApp.entity.CompanyGadgetListEntity;
+import com.serviceApp.entity.CompanyLoginEntity;
 import com.serviceApp.entity.RegistrationEntity;
 import com.serviceApp.repository.CompanyGadgetRepository;
 import com.serviceApp.repository.ComplainRepository;
+import com.serviceApp.repository.LoginRepository;
 import com.serviceApp.repository.RegistrationRepository;
+import com.serviceApp.utility.mailSender.JMS;
 import com.serviceApp.utility.passwordGenerater.AutoGenerateString;
 import com.serviceApp.utility.response.Response;
 
@@ -36,7 +39,13 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 	private ComplainRepository complainRepository;
 
 	@Autowired
+	private LoginRepository loginRepository;
+
+	@Autowired
 	private Environment environment;
+
+	@Autowired
+	private JMS jms;
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -54,6 +63,7 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 			if (loginDTO.getPassword().equals(registrationEntity.getPassword())) {
 				logger.info("emaailId and password match.");
 				logger.info("return login success");
+				registrationEntity.setPassword("");
 				return new Response(environment.getProperty("LOGIN_SUCCESS"),
 						environment.getProperty("SERVER_CODE_SUCCESS"), registrationEntity);
 			}
@@ -70,16 +80,18 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 	@Override
 	public List<CompanyGadgetListEntity> getListOfGadgets(String CompanyName) {
 		logger.info("invoking getListOfGadgets()");
-		List<CompanyGadgetListEntity> companyGadgetListEntities=companyGadgetRepository.findAllByCompanyName(CompanyName);
+		List<CompanyGadgetListEntity> companyGadgetListEntities = companyGadgetRepository
+				.findAllByCompanyName(CompanyName);
 		logger.info("Returning list of gadgets");
 		return companyGadgetListEntities;
 	}
-	
+
 	@Override
 	public List<ClientComplainEntity> veiwTicketsByCompanyName(String companyName, String emailId) {
-		logger.info("");
-		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAllByCompanyName(companyName  , emailId);
-		logger.info("");
+		logger.info("invoking veiwTicketsByCompanyName()");
+		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAllByCompanyName(companyName, emailId);
+
+		logger.info("returning response");
 		return clientComplainEntity;
 	}
 
@@ -106,6 +118,10 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 			logger.info("Setted status  ");
 			created = complainRepository.save(clientComplainEntity);
 			logger.info("saved clientComplainEntity()");
+			CompanyLoginEntity loginEntity = loginRepository.findByRole("ADMIN");
+			logger.debug("get all the email id base on role = ADMIN");
+			jms.sendMail(loginEntity.getEmailId(), "Complaint raised", "complaint raised \n " + clientComplainEntity);
+			logger.debug("sending the mail");
 		}
 		if (created != null) {
 			return new Response(environment.getProperty("TICKET_CREATED"),

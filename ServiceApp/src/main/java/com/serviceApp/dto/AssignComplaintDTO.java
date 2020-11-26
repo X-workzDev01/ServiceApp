@@ -20,6 +20,5 @@ public class AssignComplaintDTO {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	public AssignComplaintDTO() {
 		logger.info("invoking "+this.getClass().getSimpleName());
-	}
-	
+	}	
 }

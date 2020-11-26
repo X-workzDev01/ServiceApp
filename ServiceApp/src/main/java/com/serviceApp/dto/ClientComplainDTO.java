@@ -7,10 +7,11 @@ import org.slf4j.LoggerFactory;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-
+@ToString
 public class ClientComplainDTO {
 
 	@NotNull
@@ -30,11 +31,5 @@ public class ClientComplainDTO {
 	
 	public ClientComplainDTO() {
 		logger.info("invooking " + this.getClass().getSimpleName());
-	}
-
-	@Override
-	public String toString() {
-		return "ClientComplainDTO [companyName=" + companyName + ", model=" + model + ", serialNo=" + serialNo
-				+ ", mcType=" + mcType + ", problem=" + problem + "]";
 	}
 }

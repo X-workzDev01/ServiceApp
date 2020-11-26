@@ -24,10 +24,4 @@ public class LoginDTO {
 	public LoginDTO() {
 		logger.info("invoking " + this.getClass().getSimpleName());
 	}
-
-	@Override
-	public String toString() {
-		return "LoginDTO [emailId=" + emailId + ", password=" + password + "]";
-	}
-
 }

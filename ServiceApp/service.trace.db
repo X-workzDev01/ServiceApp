@@ -248,3 +248,9 @@ Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Wrong user name
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:461)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 55 more
+2020-11-26 16:36:34 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (COMPANY_GADGET_LIST: ""ID"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."COMPANY_GADGET_LIST"("ID","COMPANY_NAME","DATE_OF_ASSIGNE","MC_TYPE","MODEL","SERIAL_NO","STATUS")VALUES(?,?,?,?,?,?,?) [22018-200]
+2020-11-26 16:36:34 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'' (COMPANY_GADGET_LIST: ""ID"" INTEGER NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."COMPANY_GADGET_LIST"("ID","COMPANY_NAME","DATE_OF_ASSIGNE","MC_TYPE","MODEL","SERIAL_NO","STATUS")VALUES(?,?,?,?,?,?,?) [22018-200]

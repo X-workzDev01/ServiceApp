@@ -12,4 +12,6 @@ public interface LoginRepository extends JpaRepository<CompanyLoginEntity, Integ
 
 	List<CompanyLoginEntity> findAllByRole(String role);
 
+	CompanyLoginEntity findByRole(String string);
+
 }

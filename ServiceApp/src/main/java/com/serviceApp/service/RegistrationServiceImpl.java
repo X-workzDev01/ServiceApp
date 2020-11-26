@@ -40,7 +40,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 		logger.info("invoking registrationServiceImpl.clientRegistration()");
 		RegistrationEntity registrationEntity = new RegistrationEntity();
 		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationDTO.getCompanyName());
-		logger.info("checkiing for client already there or not");
+		logger.info("checkiing for client already there or not" + registrationDTO);
 		if (entity == null) {
 			logger.info("client not found , registering client");
 			BeanUtils.copyProperties(registrationDTO, registrationEntity);
@@ -82,7 +82,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 			registrationEntity.setAuditStatus("DELETED");
 			logger.info("Client successfully deleted");
 			registrationRepository.save(registrationEntity);
-			logger.info("returning response "+registrationEntity);
+			logger.info("returning response " + registrationEntity);
 			return new Response(environment.getProperty("DELETED_CLIENT"),
 					environment.getProperty("SERVER_CODE_SUCCESS"), registrationEntity);
 		} else {

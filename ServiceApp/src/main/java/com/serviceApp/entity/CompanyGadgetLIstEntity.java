@@ -13,8 +13,8 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@ToString
 @Table(name = "CompanyGadgetList")
+@ToString
 public class CompanyGadgetListEntity {
 
 	@Id
