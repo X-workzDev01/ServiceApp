@@ -14,11 +14,8 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "companylogin")
-/*
- * @Getter
- * 
- * @Setter
- */
+@Getter
+@Setter
 @ToString
 public class CompanyLoginEntity {
 
@@ -26,6 +23,7 @@ public class CompanyLoginEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String emailId;
+	@JsonIgnore
 	private String password;
 	private String FullName;
 	private String role;
@@ -33,46 +31,4 @@ public class CompanyLoginEntity {
 	public CompanyLoginEntity() {
 		System.out.println("invoking " + this.getClass().getSimpleName());
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
-
-	@JsonIgnore
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getFullName() {
-		return FullName;
-	}
-
-	public void setFullName(String fullName) {
-		FullName = fullName;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 }
