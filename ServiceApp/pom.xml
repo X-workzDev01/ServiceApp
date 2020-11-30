@@ -17,9 +17,46 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<appengine.target.version>1.9.71</appengine.target.version>
+		<appengine-maven-plugin-version>2.2.0</appengine-maven-plugin-version>
+		<shared-configuration.version>1.0.1</shared-configuration.version>
+		<appengine-maven-plugin.version>1.9.80</appengine-maven-plugin.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+			
+		</dependency>
+		<dependency>
+			<groupId>com.google.cloud.samples</groupId>
+			<artifactId>shared-configuration</artifactId>
+			<version>${shared-configuration.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.google.cloud</groupId>
+			<artifactId>google-cloud-logging-logback</artifactId>
+			<version>0.118.1-alpha</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-maven-plugin</artifactId>
+			<version>${appengine-maven-plugin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-testing</artifactId>
+			<version>${appengine.target.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-stubs</artifactId>
+			<version>${appengine.target.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -37,23 +74,19 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.syncope.common</groupId>
 			<artifactId>syncope-common-lib</artifactId>
 			<version>2.1.7</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -73,16 +106,33 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 	</dependencies>
-
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+		<finalName>service-app</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>com.google.appengine</groupId>
+					<artifactId>appengine-maven-plugin</artifactId>
+					<version>${appengine-maven-plugin-version}</version>
+				</plugin>
+				<plugin>
+					<groupId>com.google.cloud.tools</groupId>
+					<artifactId>appengine-maven-plugin</artifactId>
+					<configuration>
+						<deploy.projectId>service-app-v2</deploy.projectId>
+						<deploy.version>v01</deploy.version>
+						<stage.enableJarSplitting>true</stage.enableJarSplitting>
+						<deploy.stopPreviousVersion>true</deploy.stopPreviousVersion>
+						<cloudSdkPath>/usr/foo/path/to/cloudsdk</cloudSdkPath>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>
