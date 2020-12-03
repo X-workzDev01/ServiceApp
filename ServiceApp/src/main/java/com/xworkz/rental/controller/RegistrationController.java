@@ -23,7 +23,7 @@ import com.xworkz.rental.service.RegistrationService;
 import com.xworkz.rental.utility.response.Response;
 
 @RestController
-//@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:4201" })
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:4201", "https://x-workzdev.github.io" })
 @RequestMapping("/api")
 public class RegistrationController {
 

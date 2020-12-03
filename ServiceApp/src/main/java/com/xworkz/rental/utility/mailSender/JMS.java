@@ -19,25 +19,13 @@ public class JMS {
 	public void registrationMail(String emailId, String password) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom(environment.getProperty("EMAIL_ID"));
-		//message.setTo(emailId);
-		message.setCc(emailId);
+		message.setTo(emailId);
 		message.setSubject("serviceapp registeration");
 		message.setText("Your Registration for ServiceApp is Successful. Your credentials are \n Email :"+ emailId +" \n Password : " + password);
 		mailSender.send(message);
 	}
 	
 	public void sendMail(String emailId,String subject, String msg) {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom(environment.getProperty("EMAIL_ID"));
-		message.setTo(emailId);
-		message.setSubject(subject);
-		message.setText(msg);
-		
-		mailSender.send(message);
-		
-	}
-	
-	public void sendMailToMultipleAccount(String[] emailId,String subject, String msg) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom(environment.getProperty("EMAIL_ID"));
 		message.setTo(emailId);

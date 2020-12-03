@@ -25,7 +25,7 @@ public class CompanyLoginEntity {
 	private String emailId;
 	@JsonIgnore
 	private String password;
-	private String FullName;
+	private String fullName;
 	private String role;
 
 	public CompanyLoginEntity() {

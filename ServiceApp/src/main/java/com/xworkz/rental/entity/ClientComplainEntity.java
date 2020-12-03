@@ -22,7 +22,7 @@ import lombok.Setter;
 public class ClientComplainEntity {
 
 	@Id
-	private String complaintId;
+	private long complaintId;
 	private String model;
 	private String serialNo;
 	private String mcType;
@@ -34,7 +34,7 @@ public class ClientComplainEntity {
 	private String adminComment;
 	private String engineerComment;
 	@ManyToOne
-	@JoinColumn(name = "companyName")
+	@JoinColumn(name = "id")
 	@JsonIgnoreProperties("clientComplainEntities")
 	RegistrationEntity registration;
 
@@ -44,9 +44,10 @@ public class ClientComplainEntity {
 
 	@Override
 	public String toString() {
-		return "complaintId=" + complaintId + ",\n model=" + model + ",\n serialNo=" + serialNo + ",\n mcType=" + mcType
-				+ ",\n problem=" + problem + ",\n complaintStatus=" + complaintStatus + ",\n date=" + date
-				+ ",\n engineerEmail=" + engineerEmail + ",\n clientComment=" + clientComment + ",\n adminComment="
+		return "complaintId=" + complaintId + ",\n model=" + model + ",\n serialNo=" + serialNo
+				+ ",\n mcType=" + mcType + ",\n problem=" + problem + ",\n complaintStatus=" + complaintStatus + ",\n date="
+				+ date + ",\n engineerEmail=" + engineerEmail + ",\n clientComment=" + clientComment + ",\n adminComment="
 				+ adminComment + ",\n engineerComment=" + engineerComment;
 	}
+	
 }

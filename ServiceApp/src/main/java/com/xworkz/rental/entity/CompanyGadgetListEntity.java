@@ -1,5 +1,7 @@
 package com.xworkz.rental.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +26,7 @@ public class CompanyGadgetListEntity {
 	private String model;
 	private String serialNo;
 	private String mcType;
-	private String dateOfAssigne;
+	private Date dateOfAssigne;
 	private String status;//assigned/returned
 
 	public CompanyGadgetListEntity() {

@@ -2,9 +2,11 @@ package com.xworkz.rental.utility.response;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Response {
 
 	private String statusCode; // create status integer for user response
@@ -22,10 +24,4 @@ public class Response {
 		this.message = message;
 		this.object = object;
 	}
-
-	@Override
-	public String toString() {
-		return "Response [statusCode=" + statusCode + ", message=" + message + ", object=" + object + "]";
-	}
-
 }
