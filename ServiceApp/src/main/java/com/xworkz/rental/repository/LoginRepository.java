@@ -11,8 +11,11 @@ public interface LoginRepository extends JpaRepository<CompanyLoginEntity, Integ
 
 	CompanyLoginEntity findByEmailId(String emailId);
 
-	@Query(value = "select email_id from companylogin where role= :role " , nativeQuery = true)
-	List<String> findAllByRole(String role);
+	// @Query(value = "select email_id from companylogin where role= :role " ,
+	// nativeQuery = true)
+	// List<String> findAllByRole(String role);
+
+	List<CompanyLoginEntity> findAllByRole(String role);
 
 	CompanyLoginEntity findByRole(String string);
 
