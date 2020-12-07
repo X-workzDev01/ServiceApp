@@ -1,5 +1,6 @@
 package com.serviceApp.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -27,25 +28,30 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	@Autowired
 	private RegistrationRepository registrationRepository;
-	
-private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	public RegistrationServiceImpl() {
-		logger.info("invoking "+this.getClass().getSimpleName());
+		logger.info("invoking " + this.getClass().getSimpleName());
 	}
 
 	@Override
-	public Response clientRegistration(  RegistrationDTO registrationDTO) {
-
+	public Response clientRegistration(RegistrationDTO registrationDTO) {
+		logger.info("invoking clientRegistration()");
 		RegistrationEntity registrationEntity = new RegistrationEntity();
 		RegistrationEntity entity = registrationRepository.findByCompanyName(registrationDTO.getCompanyName());
+		logger.info("checkiing for client already there or not");
 		if (entity == null) {
+			logger.info("");
 			BeanUtils.copyProperties(registrationDTO, registrationEntity);
 			registrationEntity.setPassword(AutoGenerateString.autoGenerateString());
-			RegistrationEntity registered=registrationRepository.save(registrationEntity);
+			registrationEntity.setDate(new Date());
+			registrationEntity.setAuditStatus("insert");
+			RegistrationEntity registered = registrationRepository.save(registrationEntity);
 			javaMailSender.sendMail(registrationDTO.getEmailId(), registrationEntity.getPassword());
 			return new Response(environment.getProperty("USER_REGISTERD"),
-					environment.getProperty("SERVER_CODE_SUCCESS"),registered);
+					environment.getProperty("SERVER_CODE_SUCCESS"), registered);
+
 		} else {
 			return new Response(environment.getProperty("CLIENT_PRESENT"),
 					environment.getProperty("SERVER_CODE_ERROR"));
@@ -54,7 +60,7 @@ private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
 	public List<RegistrationEntity> getAllClients() {
-		List<RegistrationEntity> registrationEntity= registrationRepository.findAll();
+		List<RegistrationEntity> registrationEntity = registrationRepository.findAll();
 		return registrationEntity;
 	}
 }

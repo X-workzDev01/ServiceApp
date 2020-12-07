@@ -20,12 +20,12 @@ public class CompanyGadgetListEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private String emailId;
+	private String companyName;
 	private String model;
 	private String serialNo;
 	private String mcType;
 	private String dateOfAssigne;
-	private String status;
+	private String status;//assigned/returned
 
 	public CompanyGadgetListEntity() {
 		System.out.println();

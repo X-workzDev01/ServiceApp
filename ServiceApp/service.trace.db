@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2020-11-24 17:31:05 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABALE[*] CLIENT_COMPLAIN_ENTITY"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, VIEW, ROLE, ALIAS, SCHEMA, ALL, DOMAIN, TYPE, DATATYPE, AGGREGATE, SYNONYM"; SQL statement:
 drop tabale CLIENT_COMPLAIN_ENTITY [42001-200]
@@ -7,3 +8,11 @@ drop table REGISTRATION_ENTITY [42102-200]
 2020-11-24 19:15:07 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DROP TABLE REGISTRATION REGISTRATION_CLIENT_COMPLAIN[*]"; SQL statement:
 drop table REGISTRATION REGISTRATION_CLIENT_COMPLAIN [42000-200]
+=======
+2020-11-26 00:03:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CLIENT_COMPLAIN" not found; SQL statement:
+select company.* from CLIENT_COMPLAIN  as company inner join REGISTRATION as reg where reg.COMPANY_NAME= ? [42102-200]
+2020-11-26 00:03:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CLIENT_COMPLAIN" not found; SQL statement:
+select company.* from CLIENT_COMPLAIN  as company inner join REGISTRATION as reg where reg.COMPANY_NAME= ? [42102-200]
+>>>>>>> delete-client

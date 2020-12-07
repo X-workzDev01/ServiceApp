@@ -1,5 +1,6 @@
 package com.serviceApp.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -45,39 +46,74 @@ public class ClientLoginServiceImpl implements ClientLoginService {
 
 	@Override
 	public Response login(LoginDTO loginDTO) {
+		logger.info("invoking ClientLoginServiceImpl.login();");
 		RegistrationEntity registrationEntity = registrationRepository.findByEmailId(loginDTO.getEmailId());
-
+		logger.info("Getting data from registration table");
 		if (registrationEntity != null) {
+			logger.info("registrationEntity not null " + registrationEntity);
 			if (loginDTO.getPassword().equals(registrationEntity.getPassword())) {
+				logger.info("emaailId and password match.");
+				logger.info("return login success");
 				return new Response(environment.getProperty("LOGIN_SUCCESS"),
-						environment.getProperty("SERVER_CODE_SUCCESS"),registrationEntity);
+						environment.getProperty("SERVER_CODE_SUCCESS"), registrationEntity);
 			}
+			logger.info("password does't match.  Returning password does't match");
 			return new Response(environment.getProperty("INVALID_PASSWORD"),
 					environment.getProperty("SERVER_CODE_ERROR"));
 		} else {
+			logger.info("email not found ");
 			return new Response(environment.getProperty("INVALID_CREDENTIALS"),
 					environment.getProperty("SERVER_CODE_ERROR"));
 		}
 	}
 
 	@Override
-	public List<CompanyGadgetListEntity> getListOfGadgets(String emailID) {
-
-		return companyGadgetRepository.findAllByEmailId(emailID);
+	public List<CompanyGadgetListEntity> getListOfGadgets(String CompanyName) {
+		logger.info("invoking getListOfGadgets()");
+		List<CompanyGadgetListEntity> companyGadgetListEntities=companyGadgetRepository.findAllByCompanyName(CompanyName);
+		logger.info("Returning list of gadgets");
+		return companyGadgetListEntities;
+	}
+	
+	@Override
+	public List<ClientComplainEntity> veiwTicketsByCompanyName(String companyName) {
+		logger.info("");
+		List<ClientComplainEntity> clientComplainEntity = complainRepository.findAllByCompanyName(companyName);
+		logger.info("");
+		return clientComplainEntity;
 	}
 
 	@Override
 	public Response createTicket(ClientComplainDTO clientComplainDTO) {
-		ClientComplainEntity clientComplainEntity = new ClientComplainEntity();
-		BeanUtils.copyProperties(clientComplainDTO, clientComplainEntity);
-		clientComplainEntity.setTicket(AutoGenerateString.autoGenerateTicket());
-		ClientComplainEntity created = complainRepository.save(clientComplainEntity);
+		// change methos by emailid and company name
+		logger.info("invoked createTicket() {0}", clientComplainDTO);
+		RegistrationEntity entity = registrationRepository.findByCompanyName(clientComplainDTO.getCompanyName());
+		logger.info("" + entity);
+		ClientComplainEntity created = null;
+		logger.info("getting registration entity");
+		if (entity != null) {
+			logger.info("Entity is not null");
+			ClientComplainEntity clientComplainEntity = new ClientComplainEntity();
+			BeanUtils.copyProperties(clientComplainDTO, clientComplainEntity);
+			logger.info("Copyed properties from dto to entity");
+			clientComplainEntity.setComplaintId(AutoGenerateString.autoGenerateTicket());
+			logger.info("Ticket generated");
+			clientComplainEntity.setRegistration(entity);
+			logger.info("Setted foreginkey ");
+			clientComplainEntity.setDate(new Date());
+			logger.info("Setted current date ");
+			clientComplainEntity.setComplaintStatus("pending");
+			logger.info("Setted status  ");
+			created = complainRepository.save(clientComplainEntity);
+			logger.info("saved clientComplainEntity()");
+		}
 		if (created != null) {
 			return new Response(environment.getProperty("TICKET_CREATED"),
-					environment.getProperty("SERVER_CODE_SUCCESS"),created);
-		}else {
+					environment.getProperty("SERVER_CODE_SUCCESS"), created);
+		} else {
 			return new Response(environment.getProperty("FAIL_TO_CREATE_TICKET"),
 					environment.getProperty("SERVER_CODE_ERROR"));
 		}
+
 	}
 }

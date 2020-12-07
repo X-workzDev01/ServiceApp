@@ -8,24 +8,28 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Entity
-@Table (name = "companylogin")
+@Table(name = "companylogin")
 @Getter
 @Setter
-@ToString
 public class CompanyLoginEntity {
 
 	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String emailId;
 	private String password;
 	private String FullName;
-	private String role;	
-	
+	private String role;
+
 	public CompanyLoginEntity() {
-		System.out.println("invoking "+this.getClass().getSimpleName());
+		System.out.println("invoking " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	public String toString() {
+		return "CompanyLoginEntity [id=" + id + ", emailId=" + emailId + ", password=" + password + ", FullName="
+				+ FullName + ", role=" + role + "]";
 	}
 }

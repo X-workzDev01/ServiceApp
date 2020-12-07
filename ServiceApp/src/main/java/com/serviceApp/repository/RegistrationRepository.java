@@ -11,4 +11,6 @@ public interface RegistrationRepository extends JpaRepository<RegistrationEntity
 	RegistrationEntity findByEmailId(String emailId);
 	
 
+	RegistrationEntity deleteByCompanyName(String companyName);
+
 }

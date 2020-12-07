@@ -1,18 +1,16 @@
 package com.serviceApp.dto;
 
-import java.util.Date;
-
 import javax.validation.constraints.NotNull;
 
-import com.serviceApp.entity.RegistrationEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+
 public class ClientComplainDTO {
 
 	@NotNull
@@ -25,8 +23,18 @@ public class ClientComplainDTO {
 	private String mcType;
 	@NotNull
 	private String problem;
+	@NotNull
+	private String clientComment;
 
+	Logger logger = LoggerFactory.getLogger(getClass());
+	
 	public ClientComplainDTO() {
-		System.out.println("invooking " + this.getClass().getSimpleName());
+		logger.info("invooking " + this.getClass().getSimpleName());
+	}
+
+	@Override
+	public String toString() {
+		return "ClientComplainDTO [companyName=" + companyName + ", model=" + model + ", serialNo=" + serialNo
+				+ ", mcType=" + mcType + ", problem=" + problem + "]";
 	}
 }

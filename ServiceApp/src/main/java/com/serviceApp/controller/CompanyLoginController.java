@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.serviceApp.dto.LoginDTO;
 import com.serviceApp.entity.ClientComplainEntity;
+import com.serviceApp.entity.CompanyGadgetListEntity;
+import com.serviceApp.entity.CompanyLoginEntity;
 import com.serviceApp.service.CompanyLoginService;
 import com.serviceApp.utility.response.Response;
 
@@ -33,19 +35,39 @@ public class CompanyLoginController {
 		logger.info("invoking ---------" + this.getClass().getSimpleName());
 	}
 
-	@PostMapping("/login")
-	public ResponseEntity<Response> login(@Valid /* @RequestBody */ LoginDTO logindto) {
+	@GetMapping("/viewAllEngineer")
+	public List<CompanyLoginEntity> viewAllEngineer() {
+		logger.info("invoking viewAllEngineer()");
+		List<CompanyLoginEntity> response = companyLoginService.viewAllEngineer();
+		logger.info("returning response " + response);
+		return response;
+	}
 
-		return new ResponseEntity<Response>(companyLoginService.login(logindto), HttpStatus.OK);
+	@PostMapping("/login")
+	public ResponseEntity<Response> companyLogin(@Valid /* @RequestBody */ LoginDTO logindto) {
+		logger.info("invoking companyLogin()");
+		Response response = null;
+		if (logindto != null) {
+			logger.info("");
+			response = companyLoginService.login(logindto);
+			logger.info("");
+		}
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
-	
+
+	@GetMapping("/viewAllGadgets")
+	public List<CompanyGadgetListEntity> viewAllGadgets() {
+		logger.info("invoking viewAllGadgets()");
+		List<CompanyGadgetListEntity> response = companyLoginService.veiwAllGadgets();
+		logger.info("Returning response");
+		return response;
+	}
+
 	@GetMapping("/viewAllTickets")
-	public List<ClientComplainEntity> viewAllTickets(){
-		return companyLoginService.veiwAllTicketas();
-	}
-	
-	@PostMapping("/viewTicketsByCompanyName")
-	public List<ClientComplainEntity> viewTicketsByCompanyName(){
-		return companyLoginService.veiwTicketasByCompanyName();
+	public List<ClientComplainEntity> viewAllTickets() {
+		logger.info("invoking viewAllTickets()");
+		List<ClientComplainEntity> response = companyLoginService.veiwAllTicketas();
+		logger.info("Returning response");
+		return response;
 	}
 }
