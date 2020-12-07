@@ -1,9 +1,0 @@
-package com.rentalService.service;
-
-import com.rentalService.dto.Registration;
-
-public interface RegistrationService {
-	
-	public void registeredClient (Registration registrationDTO);
-
-}
